@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\MetricsAPI-LOG680.props" />
+</Project>

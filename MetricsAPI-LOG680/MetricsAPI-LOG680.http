@@ -1,0 +1,6 @@
+@MetricsAPI_LOG680_HostAddress = http://localhost:5026
+
+GET {{MetricsAPI_LOG680_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
