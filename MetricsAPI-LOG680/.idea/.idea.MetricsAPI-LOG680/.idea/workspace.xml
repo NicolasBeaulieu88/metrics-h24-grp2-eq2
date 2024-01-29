@@ -10,7 +10,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="483314e0-0eb2-4114-8afd-3cf85fc039ff" name="Changes" comment="" />
+    <list default="true" id="483314e0-0eb2-4114-8afd-3cf85fc039ff" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MetricsAPI-LOG680/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MetricsAPI-LOG680/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/TestController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/TestController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MetricsAPI-LOG680.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MetricsAPI-LOG680.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.exe" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.MvcApplicationPartsAssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.MvcApplicationPartsAssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/apphost.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/ref/MetricsAPI-LOG680.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/ref/MetricsAPI-LOG680.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/refint/MetricsAPI-LOG680.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/refint/MetricsAPI-LOG680.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/MetricsAPI-LOG680.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/MetricsAPI-LOG680.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/MetricsAPI-LOG680.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/obj/MetricsAPI-LOG680.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/MetricsAPI-LOG680.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/obj/MetricsAPI-LOG680.csproj.nuget.g.targets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/obj/rider.project.restore.info" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +50,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/399c9da7c76d445f9dfcefd64260d594e1353e8cf6246a266a6d594fb1d4b37/IProjectsClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/55e9a331327afded380129f41b8ce0a223c388e272f8716f24f78ab6b066b7/GraphQLHttpClientOptions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/837a64e6d251f99fe20799c6a509744e17551ceb471a8756b1234da33ed462c/Repository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/88382f957ea3f06cbc6e5fff548d348f16f2972aa1164938be5af6a1bd3c84/OrganizationsClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8f6aa74dfe617ab2357518c8ea44a84e84ae1f79282db6b3f8c72df4b7f4a/ProjectRequest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/93df953523b58a28a0f2edd0f9b43e5e5283abfc4b2d91d60ef2e77a18791/IRepositoriesClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d33c36a9286e8690507243239ea19156d791315a39dab49993c8de8b2caf24/GraphQLHttpClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b0dfae695324aa6553ac4e823d3edc58110d9b3ff6a5f2b3dfafa26606930d1/GitHubClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/cff02b6ea692ad3db896802f2b1528a88ba7b7e8c9d7e6737eb13e3874b5a9b/ProjectsClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Controllers/TestController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/appsettings.json" root0="FORCE_HIGHLIGHTING" />
@@ -35,11 +74,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    ".NET Launch Settings Profile.MetricsAPI-LOG680: http.executor": "Run",
+    ".NET Launch Settings Profile.MetricsAPI-LOG680: http.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feature-dabatase-connection",
+    "git-widget-placeholder": "feature-test-github-api-connection",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -124,7 +163,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="194529ab-db78-4eee-a48e-50f656ea6498" name="Changes" comment="" />
+      <changelist id="483314e0-0eb2-4114-8afd-3cf85fc039ff" name="Changes" comment="" />
       <created>1705951569077</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -132,6 +171,7 @@
       <workItem from="1705951572325" duration="983000" />
       <workItem from="1705952818288" duration="542000" />
       <workItem from="1705953734686" duration="5979000" />
+      <workItem from="1706560709202" duration="6585000" />
     </task>
     <servers />
   </component>
@@ -140,5 +180,55 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Controllers/TestController.cs</url>
+          <line>134</line>
+          <properties documentPath="C:\Users\erick\OneDrive\Documents\_La_U\2023-2024\Hiver 2024\LOG680\Labos\metrics-h24-grp2-eq2\MetricsAPI-LOG680\Controllers\TestController.cs" initialLine="134" containingFunctionPresentation="Method 'GetTestGraphQL'">
+            <startOffsets>
+              <option value="5083" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5131" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Controllers/TestController.cs</url>
+          <line>145</line>
+          <properties documentPath="C:\Users\erick\OneDrive\Documents\_La_U\2023-2024\Hiver 2024\LOG680\Labos\metrics-h24-grp2-eq2\MetricsAPI-LOG680\Controllers\TestController.cs" initialLine="145" containingFunctionPresentation="Method 'GetTestGraphQL'">
+            <startOffsets>
+              <option value="5469" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5529" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Controllers/TestController.cs</url>
+          <line>156</line>
+          <properties documentPath="C:\Users\erick\OneDrive\Documents\_La_U\2023-2024\Hiver 2024\LOG680\Labos\metrics-h24-grp2-eq2\MetricsAPI-LOG680\Controllers\TestController.cs" initialLine="157" containingFunctionPresentation="Method 'GetTestGraphQL'">
+            <startOffsets>
+              <option value="5897" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5957" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="LaunchSettings">
+        <watch expression="new System.Linq.SystemCore_EnumerableDebugView&lt;System.Collections.Generic.KeyValuePair&lt;string, Newtonsoft.Json.Linq.JToken&gt;&gt;(this.&lt;graphQLResponse&gt;5__6.Data).Items[0].Value" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
