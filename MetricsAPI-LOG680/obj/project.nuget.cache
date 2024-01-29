@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "kgtov6pVZif11dGOVPNEPHmG+ad8n+bryWGAG5EbPpv1NmkW/OfMBrNLQhkEX17S+JKdIRJBlX9i7ME4gi9rqw==",
+  "dgSpecHash": "gQ+HEFf+oHZHkNwlld/aVwTUOXuc4lhdORigDr692uvGGEGqiTkQENSp/oogSc+bKMXz6odowaAbMZ0ZIKmdoQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\erick\\OneDrive\\Documents\\_La_U\\2023-2024\\Hiver 2024\\LOG680\\Labos\\metrics-h24-grp2-eq2\\MetricsAPI-LOG680\\MetricsAPI-LOG680.csproj",
   "expectedPackageFiles": [
@@ -33,6 +33,7 @@
     "C:\\Users\\erick\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\erick\\.nuget\\packages\\npgsql\\8.0.0\\npgsql.8.0.0.nupkg.sha512",
     "C:\\Users\\erick\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.0\\npgsql.entityframeworkcore.postgresql.8.0.0.nupkg.sha512",
+    "C:\\Users\\erick\\.nuget\\packages\\octokit\\9.1.1\\octokit.9.1.1.nupkg.sha512",
     "C:\\Users\\erick\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "C:\\Users\\erick\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "C:\\Users\\erick\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",

@@ -11,6 +11,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "8.0.1",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.19.5",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.0",
+          "Octokit": "9.1.1",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
         "runtime": {
@@ -411,6 +412,14 @@
           }
         }
       },
+      "Octokit/9.1.1": {
+        "runtime": {
+          "lib/netstandard2.0/Octokit.dll": {
+            "assemblyVersion": "9.1.1.0",
+            "fileVersion": "9.1.1.0"
+          }
+        }
+      },
       "Swashbuckle.AspNetCore/6.4.0": {
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "6.0.5",
@@ -751,6 +760,13 @@
       "sha512": "sha512-GDXiMS9peEdjSCU/rfgyHruio7q6tYuywGaktqEi6UPQ6ILechp3fVVX+dHXkIXt4nklCBzYVWkzFrSL9ubKUA==",
       "path": "npgsql.entityframeworkcore.postgresql/8.0.0",
       "hashPath": "npgsql.entityframeworkcore.postgresql.8.0.0.nupkg.sha512"
+    },
+    "Octokit/9.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-I9vbat7rmMnlpcxeTMiLyBrDlb4RC3t94qCkjf0HIjQhrwq+pt3dkwUyYt/Wl+v27WMbc718CJjMFO+Iw1et7g==",
+      "path": "octokit/9.1.1",
+      "hashPath": "octokit.9.1.1.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore/6.4.0": {
       "type": "package",

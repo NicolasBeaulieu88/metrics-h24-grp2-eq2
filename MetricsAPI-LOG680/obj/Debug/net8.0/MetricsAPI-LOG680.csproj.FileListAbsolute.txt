@@ -135,3 +135,4 @@ C:\Users\erick\OneDrive\Documents\_La_U\2023-2024\Hiver 2024\LOG680\Labos\metric
 C:\Users\erick\OneDrive\Documents\_La_U\2023-2024\Hiver 2024\LOG680\Labos\metrics-h24-grp2-eq2\MetricsAPI-LOG680\obj\Debug\net8.0\MetricsAPI-LOG680.pdb
 C:\Users\erick\OneDrive\Documents\_La_U\2023-2024\Hiver 2024\LOG680\Labos\metrics-h24-grp2-eq2\MetricsAPI-LOG680\obj\Debug\net8.0\MetricsAPI-LOG680.genruntimeconfig.cache
 C:\Users\erick\OneDrive\Documents\_La_U\2023-2024\Hiver 2024\LOG680\Labos\metrics-h24-grp2-eq2\MetricsAPI-LOG680\obj\Debug\net8.0\ref\MetricsAPI-LOG680.dll
+C:\Users\erick\OneDrive\Documents\_La_U\2023-2024\Hiver 2024\LOG680\Labos\metrics-h24-grp2-eq2\MetricsAPI-LOG680\bin\Debug\net8.0\Octokit.dll
