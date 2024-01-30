@@ -26,7 +26,7 @@ namespace MetricsAPI_LOG680.Controllers
             return Task.FromResult<ActionResult>(Ok(new{something = "hell yeah"}));
         }
         
-        [HttpGet("TestGitHubAPI")]
+        [HttpGet("TestOctokit")]
         public async Task<ActionResult> GetTestGitHubAPI(string? username, string? repository, string? token)
         {
             // Replace these values with your GitHub username, repository name, and personal access token
@@ -48,10 +48,6 @@ namespace MetricsAPI_LOG680.Controllers
                 var repositoryInfo = await client.Repository.Get(username, repository);
                 msg = $"Repository: {repositoryInfo.Name}";
                 msg += $"Description: {repositoryInfo.Description}";
-                msg += $"Default Branch: {repositoryInfo.DefaultBranch}";
-                msg += $"Stars: {repositoryInfo.StargazersCount}";
-                msg += $"Watchers: {repositoryInfo.WatchersCount}";
-                msg += $"Forks: {repositoryInfo.ForksCount}";
             }
             catch (NotFoundException ex)
             {
@@ -71,7 +67,7 @@ namespace MetricsAPI_LOG680.Controllers
             // Replace these values with your GitHub username, repository name, and personal access token
             owner ??= "NicolasBeaulieu88";
             repository ??= "metrics-h24-grp2-eq2";
-            token ??= "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";
+            token ??= "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";
 
             var address = "https://api.github.com/graphql";
 
@@ -102,7 +98,8 @@ namespace MetricsAPI_LOG680.Controllers
                         repository(name: """ + repository + @""", owner: """ + owner + @"""){
                             id
                             name
-                            projectsV2(first: 20) {
+                            projectsV2(first: 10) {
+                                totalCount
                                 nodes {
                                     id
                                     title
@@ -118,12 +115,16 @@ namespace MetricsAPI_LOG680.Controllers
                 
                 var repositoryNode = graphQLResponse.Data["repository"];
                 var repositoryName = repositoryNode["name"].Value<string>();
-
+                
                 try
                 {
-                    var projectsNode = repositoryNode["projectsV2"]["node"];
-                    var projectId = projectsNode[0]["id"].Value<int>();
-                    var projectName = projectsNode[0]["title"].Value<string>();
+                    var projectsNode = repositoryNode["projectsV2"]["nodes"];
+                    var project = projectsNode.First;
+                    var projectId = project["id"].Value<string>();
+                    var projectName = project["title"].Value<string>();
+                    
+                    Console.WriteLine($"Project: {projectName}");
+                    Console.WriteLine($"Id: {projectId}");
                 }
                 catch (Exception e)
                 {
