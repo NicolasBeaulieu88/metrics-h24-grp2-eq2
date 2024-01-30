@@ -12,10 +12,11 @@ public class GraphQLHelper : IGraphQLHelper
     {
         _configuration = configuration;
     }
-    public GraphQLHttpClient GetClient()
+    public GraphQLHttpClient GetClient(string? token)
     {
         var graphQLSettings = GetGraphQLSettings();
         var address = graphQLSettings.GetSection("address").Value;
+        token ??= graphQLSettings.GetSection("token").Value;
         var httpClient = new HttpClient
         {
             BaseAddress = new Uri(address),
@@ -25,7 +26,7 @@ public class GraphQLHelper : IGraphQLHelper
                 {
                     new System.Net.Http.Headers.ProductInfoHeaderValue("MyApp", "1.0")
                 },
-                Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", graphQLSettings.GetSection("token").Value)
+                Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token)
             }
         };
         

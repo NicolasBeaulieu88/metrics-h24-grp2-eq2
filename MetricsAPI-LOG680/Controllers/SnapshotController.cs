@@ -1,4 +1,5 @@
 using GraphQL.Client.Http;
+using MetricsAPI_LOG680.DTO;
 using MetricsAPI_LOG680.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
@@ -19,11 +20,12 @@ public class SnapshotController : ControllerBase
     private const string REVUE = "Revue";
     private const string TERMINEE = "Terminée";
 
-    private int _backlogCmpt = 0;
-    private int _aFaireCmpt = 0;
-    private int _enCoursCmpt = 0;
-    private int _revueCmpt = 0;
-    private int _termineeCmpt = 0;
+    private int _backlogCmpt;
+    private int _aFaireCmpt;
+    private int _enCoursCmpt;
+    private int _revueCmpt;
+    private int _termineeCmpt;
+    private int _totalCmpt;
 
     public SnapshotController(ILogger<TestController> logger, ApiDbContext dbContext, IGraphQLHelper graphQlHelper)
     {
@@ -33,10 +35,10 @@ public class SnapshotController : ControllerBase
     }
     
     [HttpGet(Name = "GetSnapshotsFromProject")]
-    public async Task<ActionResult> GetSnapshotsFromProject()
+    public async Task<ActionResult> GetSnapshotsFromProject(string? token)
     {
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
-        var graphQLClient = _graphQlHelper.GetClient();
+        var graphQLClient = _graphQlHelper.GetClient(token);
         
         var projectId = graphQLSettings.GetSection("projectId").Value;
         
@@ -93,13 +95,23 @@ public class SnapshotController : ControllerBase
                     default:
                         throw new Exception("Column Type was not found");
                 }
+
+                _totalCmpt++;
             }
+
+            var snapshot = new Snapshot
+            {
+                Backlog_items = _backlogCmpt,
+                A_faire_items = _aFaireCmpt,
+                En_cours_items = _enCoursCmpt,
+                Revue_items = _revueCmpt,
+                Terminee_items = _termineeCmpt,
+                Total_items = _totalCmpt,
+                Timestamps = DateTime.UtcNow
+            };
             
-            Console.WriteLine($"Backlog Items: {_backlogCmpt}");
-            Console.WriteLine($"A faire Items: {_aFaireCmpt}");
-            Console.WriteLine($"En cours Items: {_enCoursCmpt}");
-            Console.WriteLine($"Revue Items: {_revueCmpt}");
-            Console.WriteLine($"Terminee Items: {_termineeCmpt}");
+            await _dbContext.Snapshots.AddAsync(snapshot);
+            await _dbContext.SaveChangesAsync();
         }
         catch (Exception e)
         {
