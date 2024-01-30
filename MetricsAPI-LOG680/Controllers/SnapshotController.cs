@@ -34,11 +34,11 @@ public class SnapshotController : ControllerBase
         _graphQlHelper = graphQlHelper;
     }
     
-    [HttpGet(Name = "GetSnapshotsFromProject")]
-    public async Task<ActionResult> GetSnapshotsFromProject(string? token)
+    [HttpPost(Name = "PostSnapshot")]
+    public async Task<ActionResult> PostSnapshot(SnapshotToken snapshotToken)
     {
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
-        var graphQLClient = _graphQlHelper.GetClient(token);
+        var graphQLClient = _graphQlHelper.GetClient(snapshotToken.token);
         
         var projectId = graphQLSettings.GetSection("projectId").Value;
         
@@ -119,5 +119,10 @@ public class SnapshotController : ControllerBase
         }
         
         return Ok();
+    }
+
+    public class SnapshotToken
+    {
+        public string? token { get; set; }
     }
 }

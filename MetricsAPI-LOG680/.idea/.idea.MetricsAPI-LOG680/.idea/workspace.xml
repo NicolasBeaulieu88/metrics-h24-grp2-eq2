@@ -13,8 +13,6 @@
     <list default="true" id="483314e0-0eb2-4114-8afd-3cf85fc039ff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MetricsAPI-LOG680/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MetricsAPI-LOG680/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/SnapshotController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/SnapshotController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Helpers/GraphQLHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helpers/GraphQLHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Helpers/IGraphQLHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helpers/IGraphQLHelper.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.exe" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.pdb" afterDir="false" />
@@ -170,49 +168,6 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Controllers/TestController.cs</url>
-          <line>120</line>
-          <properties documentPath="C:\Users\erick\OneDrive\Documents\_La_U\2023-2024\Hiver 2024\LOG680\Labos\metrics-h24-grp2-eq2\MetricsAPI-LOG680\Controllers\TestController.cs" initialLine="106" containingFunctionPresentation="Method 'GetTestGraphQL'">
-            <startOffsets>
-              <option value="4408" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4465" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Controllers/TestController.cs</url>
-          <line>113</line>
-          <properties documentPath="C:\Users\erick\OneDrive\Documents\_La_U\2023-2024\Hiver 2024\LOG680\Labos\metrics-h24-grp2-eq2\MetricsAPI-LOG680\Controllers\TestController.cs" initialLine="113" containingFunctionPresentation="Method 'GetTestGraphQL'">
-            <startOffsets>
-              <option value="4083" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4165" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Controllers/SnapshotController.cs</url>
-          <line>112</line>
-          <properties documentPath="C:\Users\erick\OneDrive\Documents\_La_U\2023-2024\Hiver 2024\LOG680\Labos\metrics-h24-grp2-eq2\MetricsAPI-LOG680\Controllers\SnapshotController.cs" initialLine="112" containingFunctionPresentation="Method 'GetSnapshotsFromProject'">
-            <startOffsets>
-              <option value="3669" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3715" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="LaunchSettings">
         <watch expression="new System.Linq.SystemCore_EnumerableDebugView&lt;System.Collections.Generic.KeyValuePair&lt;string, Newtonsoft.Json.Linq.JToken&gt;&gt;(this.&lt;graphQLResponse&gt;5__6.Data).Items[0].Value" />
