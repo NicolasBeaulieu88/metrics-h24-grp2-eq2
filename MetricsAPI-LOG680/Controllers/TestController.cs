@@ -67,7 +67,7 @@ namespace MetricsAPI_LOG680.Controllers
             // Replace these values with your GitHub username, repository name, and personal access token
             owner ??= "NicolasBeaulieu88";
             repository ??= "metrics-h24-grp2-eq2";
-            token ??= "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";
+            token ??= "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";
 
             var address = "https://api.github.com/graphql";
 
