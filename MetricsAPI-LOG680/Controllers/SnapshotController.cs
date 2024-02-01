@@ -1,6 +1,6 @@
 using GraphQL.Client.Http;
-using MetricsAPI_LOG680.DTO;
 using MetricsAPI_LOG680.Helpers;
+using MetricsAPI_LOG680.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
@@ -13,6 +13,7 @@ public class SnapshotController : ControllerBase
     private readonly ILogger<TestController> _logger;
     private readonly ApiDbContext _dbContext;
     private readonly IGraphQLHelper _graphQlHelper;
+    private readonly ISnapshotService _snapshotService;
     
     private const string BACKLOG = "Backlog";
     private const string A_FAIRE = "À faire";
@@ -27,11 +28,12 @@ public class SnapshotController : ControllerBase
     private int _termineeCmpt;
     private int _totalCmpt;
 
-    public SnapshotController(ILogger<TestController> logger, ApiDbContext dbContext, IGraphQLHelper graphQlHelper)
+    public SnapshotController(ILogger<TestController> logger, ApiDbContext dbContext, IGraphQLHelper graphQlHelper, ISnapshotService snapshotService)
     {
         _logger = logger;
         _dbContext = dbContext;
         _graphQlHelper = graphQlHelper;
+        _snapshotService = snapshotService;
     }
     
     [HttpPost(Name = "PostSnapshot")]
@@ -99,16 +101,7 @@ public class SnapshotController : ControllerBase
                 _totalCmpt++;
             }
 
-            var snapshot = new Snapshot
-            {
-                Backlog_items = _backlogCmpt,
-                A_faire_items = _aFaireCmpt,
-                En_cours_items = _enCoursCmpt,
-                Revue_items = _revueCmpt,
-                Terminee_items = _termineeCmpt,
-                Total_items = _totalCmpt,
-                Timestamps = DateTime.UtcNow
-            };
+            var snapshot = _snapshotService.CreateSnapshot(_backlogCmpt, _aFaireCmpt, _enCoursCmpt, _revueCmpt, _termineeCmpt, DateTime.UtcNow);
             
             await _dbContext.Snapshots.AddAsync(snapshot);
             await _dbContext.SaveChangesAsync();
