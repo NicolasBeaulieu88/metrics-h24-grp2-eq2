@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MetricsAPI-LOG680")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+efb20dc67db8b6df504e92235060ada1b64d10da")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+11bc45fa2f91ecb4fa1da4b14840d9e0fc58f53f")]
 [assembly: System.Reflection.AssemblyProductAttribute("MetricsAPI-LOG680")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MetricsAPI-LOG680")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

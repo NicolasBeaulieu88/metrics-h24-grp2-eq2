@@ -12,21 +12,18 @@
   <component name="ChangeListManager">
     <list default="true" id="483314e0-0eb2-4114-8afd-3cf85fc039ff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MetricsAPI-LOG680/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MetricsAPI-LOG680/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/TestController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/TestController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/SnapshotController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/SnapshotController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.exe" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/apphost.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/ref/MetricsAPI-LOG680.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/ref/MetricsAPI-LOG680.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/refint/MetricsAPI-LOG680.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/refint/MetricsAPI-LOG680.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +34,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/8e941eb42f819adb116b881195158b3887a70a1c/src/DefaultBuilder/src/WebApplicationBuilder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/399c9da7c76d445f9dfcefd64260d594e1353e8cf6246a266a6d594fb1d4b37/IProjectsClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/55e9a331327afded380129f41b8ce0a223c388e272f8716f24f78ab6b066b7/GraphQLHttpClientOptions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/837a64e6d251f99fe20799c6a509744e17551ceb471a8756b1234da33ed462c/Repository.cs" root0="SKIP_HIGHLIGHTING" />
@@ -65,7 +63,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature-test-github-api-connection&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature-metrique-visualisation&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -170,23 +168,6 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Controllers/TestController.cs</url>
-          <line>120</line>
-          <properties documentPath="C:\Users\erick\OneDrive\Documents\_La_U\2023-2024\Hiver 2024\LOG680\Labos\metrics-h24-grp2-eq2\MetricsAPI-LOG680\Controllers\TestController.cs" initialLine="106" containingFunctionPresentation="Method 'GetTestGraphQL'">
-            <startOffsets>
-              <option value="4408" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4465" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="LaunchSettings">
         <watch expression="new System.Linq.SystemCore_EnumerableDebugView&lt;System.Collections.Generic.KeyValuePair&lt;string, Newtonsoft.Json.Linq.JToken&gt;&gt;(this.&lt;graphQLResponse&gt;5__6.Data).Items[0].Value" />
