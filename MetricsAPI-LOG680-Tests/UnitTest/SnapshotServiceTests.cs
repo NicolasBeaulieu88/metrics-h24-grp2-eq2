@@ -3,7 +3,7 @@
 namespace MetricsAPI_LOG680_Tests;
 
 [TestFixture]
-public class SnapshotTests
+public class SnapshotServiceTests
 {
     private DateTime _date;
     private ISnapshotService _snapshotService;
@@ -16,7 +16,7 @@ public class SnapshotTests
     }
 
     [Test]
-    public void CreateSnapshotWithValidValues()
+    public void CreateSnapshotWithValidValuesTest()
     {
         var backlogItems = 10;
         var snapshotData = _snapshotService.CreateSnapshot(backlogItems, 0, 0, 0, 0, _date);
@@ -32,7 +32,7 @@ public class SnapshotTests
     }
 
     [Test]
-    public void CreateSnapshotWithRandomValidValues()
+    public void CreateSnapshotWithRandomValidValuesTest()
     {
         var rnd = new Random();
         var backlogItems = rnd.Next(10);
