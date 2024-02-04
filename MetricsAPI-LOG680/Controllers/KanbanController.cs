@@ -104,5 +104,96 @@ namespace MetricsAPI_LOG680.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+    
+        [HttpGet("GetTerminatedItemsCount", Name = "GetTerminatedItemsCount")]
+        public async Task<ActionResult> GetTerminatedItemsCount([FromQuery] string token, [FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        {
+            try
+            {
+                var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
+                var graphQLClient = _graphQlHelper.GetClient(token);
+
+                var projectId = graphQLSettings.GetSection("projectId").Value;
+
+                var graphQLRequest = new GraphQLHttpRequest
+                {
+                    Query = @"
+                        query ($projectId: ID!) {
+                          node(id: $projectId) {
+                            ... on ProjectV2 {
+                              items(first: 100) {
+                                totalCount
+                                nodes {
+                                  fieldValues(first: 100) {
+                                    nodes {
+                                      ... on ProjectV2ItemFieldSingleSelectValue {
+                                        name
+                                        updatedAt
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }",
+                    Variables = new
+                    {
+                        projectId                        
+                    }
+                };
+
+                var graphQLResponse = await graphQLClient.SendQueryAsync<JObject>(graphQLRequest);
+
+                var simplifiedJson = graphQLResponse.Data.ToString();
+                
+
+                var projectsNode = graphQLResponse?.Data?["node"]?["items"]?["nodes"];
+
+                if (projectsNode == null)
+                {
+                    _logger.LogWarning($"No items found for the specified project.");
+                    return NotFound("No items found for the specified project.");
+                }
+
+                var terminatedItemsCount = 0;
+
+                foreach (var item in projectsNode)
+                {
+                    var itemName = item?["fieldValues"]?["nodes"]?.Last?["name"]?.Value<string>();
+                    Console.WriteLine(itemName);  
+                    var updatedAt = item?["fieldValues"]?["nodes"]?.Last?["updatedAt"]?.Value<DateTime>();
+                    Console.WriteLine(updatedAt);
+
+                    if (!string.IsNullOrEmpty(itemName) && itemName.Equals("Terminée", StringComparison.OrdinalIgnoreCase) &&
+                        updatedAt >= startDate && updatedAt <= endDate)
+                    {
+                        terminatedItemsCount++;
+                    }
+                }
+
+                var finishedItemsTimeframe = new FinishedItemsTimeframe
+                {
+                    StartDate = DateTime.SpecifyKind(startDate, DateTimeKind.Utc),
+                    EndDate = DateTime.SpecifyKind(endDate, DateTimeKind.Utc),
+                    FinishedItemsCount = terminatedItemsCount
+                };
+
+                await _dbContext.FinishedItemsTimeframes.AddAsync(finishedItemsTimeframe);
+                await _dbContext.SaveChangesAsync();
+
+                // Log count of terminated items
+                _logger.LogInformation($"Terminée Items Count between {startDate} and {endDate}: {terminatedItemsCount}");
+                
+                return Ok("Terminated Items Count: " + terminatedItemsCount);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error while retrieving terminated items count");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
     }
+
+
 }
