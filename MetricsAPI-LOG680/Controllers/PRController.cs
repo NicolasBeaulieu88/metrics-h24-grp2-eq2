@@ -235,6 +235,54 @@ public class PRController : ControllerBase
             return BadRequest(e.Message);
         }
     }
+
+    [HttpGet("GetPRDiscussion")] // PRDiscussion the sum of comments, reviews and review requests for a given PR
+    public async Task<IActionResult> GetPRDiscussion([FromQuery]GithubToken githubToken, [FromQuery]GraphQLPullRequest pr){
+
+        var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
+        var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
+        
+        var projectId = graphQLSettings.GetSection("projectId").Value;
+
+        var graphQLRequest = new GraphQLHttpRequest
+        {
+            Query = @"
+                query {
+                    repository(owner: ""NicolasBeaulieu88"", name: ""metrics-h24-grp2-eq2"") {
+                        pullRequest(number: " + pr.number + @") {
+                            number
+                            comments {
+                                totalCount
+                            }
+                            reviews {
+                                totalCount
+                            }
+                            reviewRequests {
+                                totalCount
+                            }
+                        }
+                    }
+                }"
+        };
+        try
+        {
+            var graphQLResponse = await graphQLClient.SendQueryAsync<dynamic>(graphQLRequest);
+            
+
+            var pullRequest = graphQLResponse.Data["repository"]["pullRequest"];
+
+            int comments = int.Parse(pullRequest["comments"]["totalCount"].ToString());
+            int reviews = int.Parse(pullRequest["reviews"]["totalCount"].ToString());
+            int reviewRequests = int.Parse(pullRequest["reviewRequests"]["totalCount"].ToString());
+
+            return Ok("Discussion: " + comments + " comments, " + reviews + " reviews, " + reviewRequests + " review requests, \nTotal: " + (comments + reviews + reviewRequests) + " interactions");
+
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
     
 
     
