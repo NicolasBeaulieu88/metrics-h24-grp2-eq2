@@ -11,19 +11,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="483314e0-0eb2-4114-8afd-3cf85fc039ff" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../MetricsAPI-LOG680-Tests/MetricsAPI-LOG680-Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../MetricsAPI-LOG680-Tests/MetricsAPI-LOG680-Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MetricsAPI-LOG680-Tests/SnapshotTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../MetricsAPI-LOG680-Tests/UnitTest/SnapshotServiceTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MetricsAPI-LOG680-Tests/UnitTest1.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MetricsAPI-LOG680/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MetricsAPI-LOG680/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/SnapshotController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/SnapshotController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.exe" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.MvcApplicationPartsAssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.MvcApplicationPartsAssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/apphost.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/ref/MetricsAPI-LOG680.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/ref/MetricsAPI-LOG680.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/refint/MetricsAPI-LOG680.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/refint/MetricsAPI-LOG680.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +48,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d33c36a9286e8690507243239ea19156d791315a39dab49993c8de8b2caf24/GraphQLHttpClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b0dfae695324aa6553ac4e823d3edc58110d9b3ff6a5f2b3dfafa26606930d1/GitHubClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/cff02b6ea692ad3db896802f2b1528a88ba7b7e8c9d7e6737eb13e3874b5a9b/ProjectsClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../SnapshotControllerTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Controllers/TestController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/appsettings.json" root0="FORCE_HIGHLIGHTING" />
@@ -57,28 +62,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.MetricsAPI-LOG680: http.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature-metrique-visualisation&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.MetricsAPI-LOG680: http.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "feature-unit-test-metriques-visualisation",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\erick\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\erick\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\erick\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\erick\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\erick\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\erick\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.MetricsAPI-LOG680: http">
     <configuration name="MetricsAPI-LOG680: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/MetricsAPI-LOG680.csproj" />
@@ -158,6 +163,7 @@
       <workItem from="1705953734686" duration="5979000" />
       <workItem from="1706560709202" duration="6803000" />
       <workItem from="1706634892307" duration="4880000" />
+      <workItem from="1706885108881" duration="1446000" />
     </task>
     <servers />
   </component>

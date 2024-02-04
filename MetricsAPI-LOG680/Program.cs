@@ -1,5 +1,6 @@
 using MetricsAPI_LOG680;
 using MetricsAPI_LOG680.Helpers;
+using MetricsAPI_LOG680.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton(Configuration);
 builder.Services.AddScoped<IGraphQLHelper, GraphQLHelper>();
+builder.Services.AddScoped<ISnapshotService, SnapshotService>();
 
 var app = builder.Build();
 
