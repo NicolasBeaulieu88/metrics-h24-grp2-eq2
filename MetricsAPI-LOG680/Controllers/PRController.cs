@@ -140,6 +140,46 @@ public class PRController : ControllerBase
 
     }
 
+    [HttpGet("GetPRSize")]
+    public async Task<IActionResult> GetPRSize([FromQuery]GithubToken githubToken, [FromQuery]GraphQLPullRequest pr){
+
+        var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
+        var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
+        
+        var projectId = graphQLSettings.GetSection("projectId").Value;
+
+        var graphQLRequest = new GraphQLHttpRequest
+        {
+            Query = @"
+                query {
+                    repository(owner: ""NicolasBeaulieu88"", name: ""metrics-h24-grp2-eq2"") {
+                        pullRequest(number: " + pr.number + @") {
+                            number
+                            additions
+                            deletions
+                        }
+                    }
+                }"
+        };
+        try
+        {
+            var graphQLResponse = await graphQLClient.SendQueryAsync<dynamic>(graphQLRequest);
+            
+
+            var pullRequest = graphQLResponse.Data["repository"]["pullRequest"];
+
+            int additions = int.Parse(pullRequest["additions"].ToString());
+            int deletions = int.Parse(pullRequest["deletions"].ToString());
+
+            return Ok(additions + deletions + " lines changed");
+
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
     
 }
 
