@@ -96,7 +96,7 @@ namespace MetricsAPI_LOG680.Controllers
                 // Log counter values
                 _logger.LogInformation($"{columnName}: {_columnCmpt}");
 
-                return Ok();
+                return Ok($"{columnName}: {_columnCmpt}");
             }
             catch (Exception e)
             {
