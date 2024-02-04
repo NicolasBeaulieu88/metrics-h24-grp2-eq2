@@ -187,7 +187,7 @@ namespace MetricsAPI_LOG680.Controllers
                 // Log count of terminated items
                 _logger.LogInformation($"Terminée Items Count between {startDate} and {endDate}: {terminatedItemsCount}");
                 
-                return Ok();
+                return Ok("Terminated Items Count: " + terminatedItemsCount);
             }
             catch (Exception e)
             {
