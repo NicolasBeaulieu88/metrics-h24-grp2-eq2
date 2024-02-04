@@ -85,9 +85,52 @@ public class PRController : ControllerBase
             DateTime createdAt = DateTime.Parse(pullRequest["createdAt"].ToString());
             DateTime closedAt = DateTime.Parse(pullRequest["closedAt"].ToString());
 
-            var leadtime = closedAt - createdAt;
+            var leadTime = closedAt - createdAt;
+
+            return Ok(leadTime.Days + " days " + leadTime.Hours + " hours");
+
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+
+    }
+
+    [HttpGet("GetPRMergeTime")]
+    public async Task<IActionResult> GetPRMergeTime([FromQuery]GithubToken githubToken, [FromQuery]GraphQLPullRequest pr){
+
+        var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
+        var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
+        
+        var projectId = graphQLSettings.GetSection("projectId").Value;
+
+        var graphQLRequest = new GraphQLHttpRequest
+        {
+            Query = @"
+                query {
+                    repository(owner: ""NicolasBeaulieu88"", name: ""metrics-h24-grp2-eq2"") {
+                        pullRequest(number: " + pr.number + @") {
+                            number
+                            createdAt
+                            mergedAt
+                        }
+                    }
+                }"
+        };
+        try
+        {
+            var graphQLResponse = await graphQLClient.SendQueryAsync<dynamic>(graphQLRequest);
             
-            return Ok(leadtime.Days + " days " + leadtime.Hours + " hours");
+
+            var pullRequest = graphQLResponse.Data["repository"]["pullRequest"];
+
+            DateTime createdAt = DateTime.Parse(pullRequest["createdAt"].ToString());
+            DateTime mergedAt = DateTime.Parse(pullRequest["mergedAt"].ToString());
+
+            var mergedTime = mergedAt - createdAt;
+
+            return Ok(mergedTime.Days + " days " + mergedTime.Hours + " hours");
 
         }
         catch (Exception e)
