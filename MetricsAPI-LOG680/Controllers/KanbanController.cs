@@ -17,7 +17,7 @@ namespace MetricsAPI_LOG680.Controllers
         private readonly IGraphQLHelper _graphQlHelper;
 
         private int _columnCmpt;
-        private int _totalCmpt;
+        
 
         public KanbanController(ILogger<KanbanController> logger, ApiDbContext dbContext, IGraphQLHelper graphQlHelper)
         {
@@ -81,26 +81,20 @@ namespace MetricsAPI_LOG680.Controllers
                     {
                         _columnCmpt++;
                     }
-
-                    _totalCmpt++;
+                    
                 }
+
+                var columnActivityCount = new ColumnActivityCount
+                {
+                    ColumnName = columnName,
+                    ActiveTicketCount = _columnCmpt
+                };
+
+                await _dbContext.ColumnActivityCounts.AddAsync(columnActivityCount);
+                await _dbContext.SaveChangesAsync();
 
                 // Log counter values
                 _logger.LogInformation($"{columnName}: {_columnCmpt}");
-                _logger.LogInformation($"Total: {_totalCmpt}");
-
-                var snapshot = new Snapshot
-                {                  
-                    Total_items = _totalCmpt,
-                    Timestamps = DateTime.UtcNow
-                };
-
-                await _dbContext.Snapshots.AddAsync(snapshot);
-                await _dbContext.SaveChangesAsync();
-
-                // Print results to console
-                Console.WriteLine($"{columnName}: {_columnCmpt}");
-                Console.WriteLine($"Total: {_totalCmpt}");
 
                 return Ok();
             }
