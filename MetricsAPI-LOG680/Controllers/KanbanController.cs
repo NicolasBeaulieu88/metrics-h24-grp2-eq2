@@ -139,9 +139,7 @@ namespace MetricsAPI_LOG680.Controllers
                         }",
                     Variables = new
                     {
-                        projectId,
-                        startDate,
-                        endDate
+                        projectId                        
                     }
                 };
 
