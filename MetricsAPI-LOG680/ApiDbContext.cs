@@ -10,4 +10,5 @@ public class ApiDbContext : DbContext
     public DbSet<TodoItem> TodoItems { get; set; }
     public DbSet<Snapshot> Snapshots { get; set; }
     public DbSet<ColumnActivityCount> ColumnActivityCounts { get; set; }
+    public DbSet<FinishedItemsTimeframe> FinishedItemsTimeframes { get; set; }
 }
