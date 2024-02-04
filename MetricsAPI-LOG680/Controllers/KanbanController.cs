@@ -236,10 +236,7 @@ namespace MetricsAPI_LOG680.Controllers
 
                 var graphQLResponse = await graphQLClient.SendQueryAsync<JObject>(graphQLRequest);
 
-                var simplifiedJson = graphQLResponse.Data.ToString();
-                
-                Console.WriteLine(simplifiedJson);
-
+        
                 var projectsNode = graphQLResponse?.Data?["node"]?["items"]?["nodes"];
 
                 if (projectsNode == null)
@@ -262,6 +259,7 @@ namespace MetricsAPI_LOG680.Controllers
                     if (!string.IsNullOrEmpty(itemName) && itemName.Equals("Terminée", StringComparison.OrdinalIgnoreCase) &&
                         updatedAt >= startDate && updatedAt <= endDate)
                     {
+                        terminatedItemsCount++;
                         var leadTime = updatedAt - createdAt;
                         var x = new LeadTimeTimeframe
                         {
