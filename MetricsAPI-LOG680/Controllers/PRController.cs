@@ -69,6 +69,8 @@ public class PRController : ControllerBase
                     repository(owner: ""NicolasBeaulieu88"", name: ""metrics-h24-grp2-eq2"") {
                         pullRequest(number: " + pr.number + @") {
                             number
+                            createdAt
+                            closedAt
                         }
                     }
                 }"
@@ -78,18 +80,14 @@ public class PRController : ControllerBase
             var graphQLResponse = await graphQLClient.SendQueryAsync<dynamic>(graphQLRequest);
             
 
-            //var pullRequest = graphQLResponse.Data["repository"]["pullRequest"];
+            var pullRequest = graphQLResponse.Data["repository"]["pullRequest"];
 
-            //var createdAt = DateTime.Parse(pullRequest["createdAt"].Value<string>());
-            //var closedAt = DateTime.Parse(pullRequest["closedAt"].Value<string>());
+            DateTime createdAt = DateTime.Parse(pullRequest["createdAt"].ToString());
+            DateTime closedAt = DateTime.Parse(pullRequest["closedAt"].ToString());
 
-            //var leadTime = closedAt - createdAt;
-
-            var leadtimeJson = new
-            {
-                leadTime = graphQLResponse.Data
-            };
-            return Ok(leadtimeJson);
+            var leadtime = closedAt - createdAt;
+            
+            return Ok(leadtime.Days + " days " + leadtime.Hours + " hours");
 
         }
         catch (Exception e)
