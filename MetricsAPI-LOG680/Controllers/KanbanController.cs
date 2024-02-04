@@ -90,8 +90,7 @@ namespace MetricsAPI_LOG680.Controllers
                 _logger.LogInformation($"Total: {_totalCmpt}");
 
                 var snapshot = new Snapshot
-                {
-                    // Adjust snapshot properties based on your requirements                    
+                {                  
                     Total_items = _totalCmpt,
                     Timestamps = DateTime.UtcNow
                 };
