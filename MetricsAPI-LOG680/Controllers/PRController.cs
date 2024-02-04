@@ -180,6 +180,63 @@ public class PRController : ControllerBase
         }
     }
 
+    [HttpGet("GetPRFlowRatio")] // PRFlowRatio = sum of opened pull requests over the sum of closed pull requests over the last 30 days
+    public async Task<IActionResult> GetPRFlowRatio([FromQuery]GithubToken githubToken){
+
+        var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
+        var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
+        
+        var projectId = graphQLSettings.GetSection("projectId").Value;
+
+        var graphQLRequest = new GraphQLHttpRequest
+        {
+            Query = @"
+                query {
+                    repository(owner: ""NicolasBeaulieu88"", name: ""metrics-h24-grp2-eq2"") {
+                        pullRequests(first: 100) {
+                            nodes {
+                                number
+                                createdAt
+                                closedAt
+                            }
+                        }
+                    }
+                }"
+        };
+        try
+        {
+            var graphQLResponse = await graphQLClient.SendQueryAsync<dynamic>(graphQLRequest);
+            
+            var pullRequests = graphQLResponse.Data["repository"]["pullRequests"]["nodes"];
+
+            int openedPR = 0;
+            int closedPR = 0;
+
+            foreach (var pr in pullRequests)
+            {
+                DateTime createdAt = DateTime.Parse(pr["createdAt"].ToString());
+                DateTime closedAt = DateTime.Now;
+
+                if (createdAt > DateTime.Now.AddDays(-30))
+                {
+                    openedPR++;
+                    if (!string.IsNullOrEmpty(pr["closedAt"]?.ToString()))
+                    {
+                    closedPR++;
+                    }
+                }
+
+            }
+            return Ok("Flow ratio: " + openedPR + " opened PRs / " + closedPR + " closed PRs, or "  + ((double)openedPR/(double)closedPR));
+
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+    
+
     
 }
 
