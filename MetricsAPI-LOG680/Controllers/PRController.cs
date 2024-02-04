@@ -85,9 +85,9 @@ public class PRController : ControllerBase
             DateTime createdAt = DateTime.Parse(pullRequest["createdAt"].ToString());
             DateTime closedAt = DateTime.Parse(pullRequest["closedAt"].ToString());
 
-            var leadtime = closedAt - createdAt;
-            
-            return Ok(leadtime.Days + " days " + leadtime.Hours + " hours");
+            var leadTime = closedAt - createdAt;
+
+            return Ok(leadTime.Days + " days " + leadTime.Hours + " hours");
 
         }
         catch (Exception e)
@@ -95,6 +95,89 @@ public class PRController : ControllerBase
             return BadRequest(e.Message);
         }
 
+    }
+
+    [HttpGet("GetPRMergeTime")]
+    public async Task<IActionResult> GetPRMergeTime([FromQuery]GithubToken githubToken, [FromQuery]GraphQLPullRequest pr){
+
+        var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
+        var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
+        
+        var projectId = graphQLSettings.GetSection("projectId").Value;
+
+        var graphQLRequest = new GraphQLHttpRequest
+        {
+            Query = @"
+                query {
+                    repository(owner: ""NicolasBeaulieu88"", name: ""metrics-h24-grp2-eq2"") {
+                        pullRequest(number: " + pr.number + @") {
+                            number
+                            createdAt
+                            mergedAt
+                        }
+                    }
+                }"
+        };
+        try
+        {
+            var graphQLResponse = await graphQLClient.SendQueryAsync<dynamic>(graphQLRequest);
+            
+
+            var pullRequest = graphQLResponse.Data["repository"]["pullRequest"];
+
+            DateTime createdAt = DateTime.Parse(pullRequest["createdAt"].ToString());
+            DateTime mergedAt = DateTime.Parse(pullRequest["mergedAt"].ToString());
+
+            var mergedTime = mergedAt - createdAt;
+
+            return Ok(mergedTime.Days + " days " + mergedTime.Hours + " hours");
+
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+
+    }
+
+    [HttpGet("GetPRSize")]
+    public async Task<IActionResult> GetPRSize([FromQuery]GithubToken githubToken, [FromQuery]GraphQLPullRequest pr){
+
+        var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
+        var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
+        
+        var projectId = graphQLSettings.GetSection("projectId").Value;
+
+        var graphQLRequest = new GraphQLHttpRequest
+        {
+            Query = @"
+                query {
+                    repository(owner: ""NicolasBeaulieu88"", name: ""metrics-h24-grp2-eq2"") {
+                        pullRequest(number: " + pr.number + @") {
+                            number
+                            additions
+                            deletions
+                        }
+                    }
+                }"
+        };
+        try
+        {
+            var graphQLResponse = await graphQLClient.SendQueryAsync<dynamic>(graphQLRequest);
+            
+
+            var pullRequest = graphQLResponse.Data["repository"]["pullRequest"];
+
+            int additions = int.Parse(pullRequest["additions"].ToString());
+            int deletions = int.Parse(pullRequest["deletions"].ToString());
+
+            return Ok(additions + deletions + " lines changed");
+
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     
