@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using GraphQL.Client.Http;
 using MetricsAPI_LOG680.Helpers;
 using MetricsAPI_LOG680.Services;
@@ -24,14 +25,13 @@ public class PRController : ControllerBase
     }
 
     [HttpGet("GetPRIds")]
-    public async Task<IActionResult> GetPRIds([FromQuery]GithubToken githubToken)
+    public async Task<IActionResult> GetPRIds([FromQuery]GithubAuth githubToken)
     {
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
         var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
         
-
-        var username = graphQLSettings.GetSection("username").Value;
-        var repository = graphQLSettings.GetSection("repository").Value;
+        var username = githubToken.username ?? graphQLSettings.GetSection("username").Value;
+        var repository = githubToken.repository ?? graphQLSettings.GetSection("repository").Value;
         
         var graphQLRequest = new GraphQLHttpRequest
         {
@@ -61,13 +61,13 @@ public class PRController : ControllerBase
     }
 
     [HttpGet("GetPRLeadTime")]
-    public async Task<IActionResult> GetPRLeadTime([FromQuery]GithubToken githubToken, [FromQuery]GraphQLPullRequest pr){
+    public async Task<IActionResult> GetPRLeadTime([FromQuery]GithubAuth githubToken, [FromQuery]GraphQLPullRequest pr){
 
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
         var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
         
-        var username = graphQLSettings.GetSection("username").Value;
-        var repository = graphQLSettings.GetSection("repository").Value;
+        var username = githubToken.username ?? graphQLSettings.GetSection("username").Value;
+        var repository = githubToken.repository ?? graphQLSettings.GetSection("repository").Value;
 
         var graphQLRequest = new GraphQLHttpRequest
         {
@@ -109,13 +109,13 @@ public class PRController : ControllerBase
     }
 
     [HttpGet("GetPRMergedTime")]
-    public async Task<IActionResult> GetPRMergedTime([FromQuery]GithubToken githubToken, [FromQuery]GraphQLPullRequest pr){
+    public async Task<IActionResult> GetPRMergedTime([FromQuery]GithubAuth githubToken, [FromQuery]GraphQLPullRequest pr){
 
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
         var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
         
-        var username = graphQLSettings.GetSection("username").Value;
-        var repository = graphQLSettings.GetSection("repository").Value;
+        var username = githubToken.username ?? graphQLSettings.GetSection("username").Value;
+        var repository = githubToken.repository ?? graphQLSettings.GetSection("repository").Value;
 
         var graphQLRequest = new GraphQLHttpRequest
         {
@@ -157,13 +157,13 @@ public class PRController : ControllerBase
     }
 
     [HttpGet("GetPRSize")]
-    public async Task<IActionResult> GetPRSize([FromQuery]GithubToken githubToken, [FromQuery]GraphQLPullRequest pr){
+    public async Task<IActionResult> GetPRSize([FromQuery]GithubAuth githubToken, [FromQuery]GraphQLPullRequest pr){
 
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
         var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
         
-        var username = graphQLSettings.GetSection("username").Value;
-        var repository = graphQLSettings.GetSection("repository").Value;
+        var username = githubToken.username ?? graphQLSettings.GetSection("username").Value;
+        var repository = githubToken.repository ?? graphQLSettings.GetSection("repository").Value;
 
         var graphQLRequest = new GraphQLHttpRequest
         {
@@ -202,13 +202,13 @@ public class PRController : ControllerBase
     }
 
     [HttpGet("GetPRFlowRatio")] // PRFlowRatio = sum of opened pull requests over the sum of closed pull requests over the last 30 days
-    public async Task<IActionResult> GetPRFlowRatio([FromQuery]GithubToken githubToken){
+    public async Task<IActionResult> GetPRFlowRatio([FromQuery]GithubAuth githubToken){
 
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
         var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
         
-        var username = graphQLSettings.GetSection("username").Value;
-        var repository = graphQLSettings.GetSection("repository").Value;
+        var username = githubToken.username ?? graphQLSettings.GetSection("username").Value;
+        var repository = githubToken.repository ?? graphQLSettings.GetSection("repository").Value;
 
         var graphQLRequest = new GraphQLHttpRequest
         {
@@ -266,13 +266,13 @@ public class PRController : ControllerBase
     }
 
     [HttpGet("GetPRDiscussions")] // PRDiscussions: the sum of comments, reviews and review requests for a given PR
-    public async Task<IActionResult> GetPRDiscussions([FromQuery]GithubToken githubToken, [FromQuery]GraphQLPullRequest pr){
+    public async Task<IActionResult> GetPRDiscussions([FromQuery]GithubAuth githubToken, [FromQuery]GraphQLPullRequest pr){
 
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
         var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
         
-        var username = graphQLSettings.GetSection("username").Value;
-        var repository = graphQLSettings.GetSection("repository").Value;
+        var username = githubToken.username ?? graphQLSettings.GetSection("username").Value;
+        var repository = githubToken.repository ?? graphQLSettings.GetSection("repository").Value;
 
         var graphQLRequest = new GraphQLHttpRequest
         {
@@ -323,9 +323,11 @@ public class PRController : ControllerBase
 }
 
 
-public class GithubToken
+public class GithubAuth
 {
     public string? token { get; set; }
+    public string? username { get; set; }
+    public string? repository { get; set; }
 }
 public class GraphQLPullRequest
 {

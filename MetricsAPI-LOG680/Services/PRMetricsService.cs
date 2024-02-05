@@ -2,7 +2,7 @@
 
 namespace MetricsAPI_LOG680.Services
 {
-    public class PRMetricsService 
+    public class PRMetricsService : IPRMetricsService
     {
         public PRLeadTime CreatePRLeadTime(string prNumber, string username, string repository, DateTime savedDate, DateTime createdDate, DateTime closedDate, TimeSpan leadTime)
         {
