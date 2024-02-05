@@ -3,6 +3,7 @@ using System;
 using MetricsAPI_LOG680;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MetricsAPI_LOG680.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    partial class ApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240205021649_SnapshotRepo")]
+    partial class SnapshotRepo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -147,11 +150,6 @@ namespace MetricsAPI_LOG680.Migrations
                     b.Property<DateTime>("Timestamps")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("timestamp");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("title");
 
                     b.Property<int>("Total_items")
                         .HasColumnType("integer")

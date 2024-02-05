@@ -39,12 +39,14 @@ public class SnapshotController : ControllerBase
     public async Task<ActionResult> PostSnapshot(string? token, string? repository, string? owner, string? projectId)
     {
         var graphQLClient = _graphQlHelper.GetClient(token);
+        bool isProjectId = false;
 
         JToken? projectsNode;
 
         if (projectId != null)
         {
             projectsNode = await QueryByProjectId(projectId, graphQLClient);
+            isProjectId = true;
         }
         else if (repository != null && owner != null)
         {
@@ -54,8 +56,11 @@ public class SnapshotController : ControllerBase
         {
             return BadRequest("Missing required parameters");
         }
+
+        var title = projectsNode["title"].ToString();
+        projectId = projectsNode["id"].Value<string>();
         
-        foreach (var item in projectsNode)
+        foreach (var item in projectsNode["items"]["nodes"])
         {
             var columnName = item["fieldValues"]["nodes"].Last["name"].Value<string>();
 
@@ -84,6 +89,15 @@ public class SnapshotController : ControllerBase
         var snapshot = _snapshotService.CreateSnapshot(_backlogCmpt, _aFaireCmpt,
                                                     _enCoursCmpt, _revueCmpt,
                                                     _termineeCmpt, DateTime.UtcNow);
+
+        if (isProjectId!)
+        {
+            snapshot.Repository_name = repository;
+            snapshot.Owner = owner;
+        }
+
+        snapshot.Project_id = projectId;
+        snapshot.Title = title;
             
         await _dbContext.Snapshots.AddAsync(snapshot);
         await _dbContext.SaveChangesAsync();
@@ -99,6 +113,7 @@ public class SnapshotController : ControllerBase
                 query($projectId: ID!) {
                   node(id: $projectId) {
                     ... on ProjectV2 {
+                      title
                       items(first: 100) {
                         totalCount
                         nodes {
@@ -124,7 +139,7 @@ public class SnapshotController : ControllerBase
         {
             var graphQLResponse = await graphQLClient.SendQueryAsync<JObject>(graphQLRequest);
                 
-            var projectsNode = graphQLResponse.Data["node"]["items"]["nodes"];
+            var projectsNode = graphQLResponse.Data["node"];
             
             return projectsNode;
         }
@@ -146,6 +161,8 @@ public class SnapshotController : ControllerBase
                     projectsV2(last:1){
                       nodes{
                         ... on ProjectV2 {
+                          id
+                          title
                           items(first: 100) {
                             totalCount
                             nodes {
@@ -175,7 +192,7 @@ public class SnapshotController : ControllerBase
         {
             var graphQLResponse = await graphQLClient.SendQueryAsync<JObject>(graphQLRequest);
                 
-            var projectsNode = graphQLResponse.Data["repository"]["projectsV2"]["nodes"].First["items"]["nodes"];
+            var projectsNode = graphQLResponse.Data["repository"]["projectsV2"]["nodes"].First;
 
             return projectsNode;
         }

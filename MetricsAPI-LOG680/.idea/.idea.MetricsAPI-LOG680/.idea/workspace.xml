@@ -13,6 +13,8 @@
     <list default="true" id="483314e0-0eb2-4114-8afd-3cf85fc039ff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MetricsAPI-LOG680/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MetricsAPI-LOG680/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/SnapshotController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/SnapshotController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DTO/Snapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DTO/Snapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/ApiDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/ApiDbContextModelSnapshot.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +51,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    ".NET Launch Settings Profile.MetricsAPI-LOG680: http.executor": "Debug",
+    ".NET Launch Settings Profile.MetricsAPI-LOG680: http.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
@@ -149,7 +151,7 @@
       <workItem from="1706560709202" duration="6803000" />
       <workItem from="1706634892307" duration="4880000" />
       <workItem from="1706885108881" duration="1446000" />
-      <workItem from="1707094751097" duration="3500000" />
+      <workItem from="1707094751097" duration="4919000" />
     </task>
     <servers />
   </component>

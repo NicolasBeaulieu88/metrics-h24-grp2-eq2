@@ -10,6 +10,18 @@ public class Snapshot
     [Column("id")] 
     public int Id { get; set; }
     
+    [Column("project_id")]
+    public string Project_id { get; set; }
+    
+    [Column("repository_name")]
+    public string? Repository_name { get; set; }
+    
+    [Column("owner")]
+    public string? Owner { get; set; }
+    
+    [Column("title")]
+    public string Title { get; set; }
+    
     [Column("backlog_items")]
     public int Backlog_items { get; set; }
     
