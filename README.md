@@ -7,13 +7,41 @@ Pour exécuter une migration dans la base de données, veuillez vous référer �
 # Labo 1
 
 ## Création d’un projet et du tableau Kanban dans GitHub
-
+Pour notre projet Kanban, nous avons créé un total de 5 colonne pour bien séparer les issues
+- La colonne *Backlog* sert à tout ce qui doit être fait mais qui n'est pas prévu pour la semaine de travail en cours
+- La colonne *À faire* sert à tout les éléément qui sont prévu pour la semaine en cours ou qui devrait déja avoir été rééalisé et sont en retard
+- La colonne *En cours* sert à noter tout le travail qui est en cours d'accomplissement, pour chaque membre de l'équipe, il ne devrait pas avoir plus d'un ou deux élément assigné dans cette colonne
+- La colonne *Revue* sert à tout le travail qui a été accompli mais qui n'a pas été revue par un second memebre de l'équipe, nous demandons une revue pour tout les changement au code de l'application, mais non obligatoire au changement de documentation
+- Finalement, la colonne *Terminéé* sert de banque pour tout le travail accompli qui fait maintenant pars du projet, c'est la dernière étape de dééveloppement, lorsque la pull-request a été accepté ou la documentation écrite
 
 ## Création des étiquettes
+Pour les étiquettes nous avons créer une liste d'étiquette assez générique qui pourrait servir dans d'autre projet aussi. Voici la lsite:
+- *bug*
+- *documentation*
+- *duplicate*
+- *enhancement*
+- *Epic*
+- *help wanted*
+- *invalid*
+- *question*
+- *Rapport*
+- *wontfix*
 
+Ces étiquettes servent à aider la visibilité lors de la recherche d'élément et nous laissons à la discrétion des développeur des ajouté ou retirer aux besoins.
 
 ## Ajout de modèles 
+Nous avons créer deux modèles pour la création d'issues et un modèle pour la création des template.
 
+### Issues
+- Bug report : sert a documenter un bug ou une erreur logique.
+- feature request : sert à documenter une fonctionnalité qui devra être développé.
+
+### pull request
+Notre modèle de pull request permet à la revue d'avoire toute l'information nécéssaire afin de ne rien oublier.
+
+Les modèles peuvent être accêdé ici:
+Pour les issues : [bug_report.md](.github/ISSUE_TEMPLATE/bug_report.md) et [feature_request.md](.github/ISSUE_TEMPLATE/feature_request.md)
+Pour les pull request: [pull_request_template.md](docs/pull_request_template.md)
 
 ## Création des milestones
 Il y a 3 Milestones pour notre projet: 
