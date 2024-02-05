@@ -102,6 +102,32 @@ public class SnapshotJSONController : ControllerBase
         return Ok(snapshots);
     }
     
+    [HttpGet("GetProjectTasksMeanBetweenTwoDates")]
+    public async Task<ActionResult> GetProjectTasksMeanBetweenTwoDates(
+        [FromQuery] DateTime startDate, [FromQuery] DateTime endDate,
+        string? owner, string? repository, string? projectId)
+    {
+        var snapshots = await _snapshotJSONService.GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
+
+        int moy = 0;
+        foreach (var snapshot in snapshots)
+        {
+            moy += snapshot.Total_items;
+        }
+        
+        return Ok($"Moyenne de issues entre {startDate} et {endDate} : {GetMoyenneIssues(moy, snapshots.Count())} issues");
+    }
+    
+    private int GetMoyenneIssues(int moy, int nbItems)
+    {
+        return moy / nbItems;
+    }
+    
+    private double GetMoyenneIssues(double moy, double nbItems)
+    {
+        return moy / nbItems;
+    }
+    
     private async Task<JToken?> QueryByProjectId(string projectId, GraphQLHttpClient graphQLClient)
     {
         var graphQLRequest = new GraphQLHttpRequest
@@ -203,21 +229,7 @@ public class SnapshotJSONController : ControllerBase
     
     /*
     
-    [HttpGet("GetProjectTasksMeanBetweenTwoDates")]
-    public async Task<ActionResult> GetProjectTasksMeanBetweenTwoDates(
-                            [FromQuery] DateTime startDate, [FromQuery] DateTime endDate,
-                            string? owner, string? repository, string? projectId)
-    {
-        var snapshots = await _snapshotService.GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
-
-        int moy = 0;
-        foreach (var snapshot in snapshots)
-        {
-            moy += snapshot.Total_items;
-        }
-        
-        return Ok($"Moyenne de issues entre {startDate} et {endDate} : {GetMoyenneIssues(moy, snapshots.Count())} issues");
-    }
+    
     
     [HttpGet("GetProjectBottleneck")]
     public async Task<ActionResult> GetProjectBottleneck(string? owner, string? repository, string? projectId)
@@ -271,13 +283,5 @@ public class SnapshotJSONController : ControllerBase
         return $"Le goulot d'étranglement dans le Kanban est {bottleneck.Key} : {btlnckPrctng.ToString("F2")}%";
     }
     
-    private int GetMoyenneIssues(int moy, int nbItems)
-    {
-        return moy / nbItems;
-    }
-    
-    private double GetMoyenneIssues(double moy, double nbItems)
-    {
-        return moy / nbItems;
-    }*/
+    */
 }
