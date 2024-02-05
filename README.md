@@ -42,7 +42,7 @@ Pour ce projet, nous avons utilisé la méthodologie GitHub Flow afin de rationa
 - Cela garantit une intégration en douceur sans perturber la stabilité du code existant.
 
 ## Création de l’application
-Nous avons opté pour faire un API en utilisant le framework .Net. Il s'agit d'un framework pour le développement entre autre d'applications web ou API, codés avec le langage de programmation C#. Nous utilisons aussi Visual Studio ou Rider pour compiler et exécuter le projet.
+Nous avons opté pour faire un API en utilisant le framework .Net. Il s'agit d'un framework pour le développement entre autre d'applications web ou API, codés avec le langage de programmation C#. Nous utilisons aussi Visual Studio ou Rider pour compiler et exécuter le projet. Le projet utilise la dernière version de .Net, soit .Net 8, puis on utilise avec C# 12. Ce framework comporte aussi une panoplie de librairies lesquelles on peut ajouter facilement au projet, nous permettant d'avoir un produit assez flexible et compatible avec plusieurs techonologies. Par exemple, grâce à cet atout, on peut facilement télécharger une librairie nous facilitent l'accès de connection à une base de données Postgresql, comme c'est le cas de notre projet, ce qui est mentionné dans la section Base de données.
 
 ## Métriques Kanban
 Il y a 4 différentes métriques Kanban: 
@@ -81,8 +81,21 @@ Une base de données Postgres est utilisé. Cette base de données a été fourn
 
 Aussi, pour effectuer une migration, il faut d'abord créer le DbSet des items à ajouter dans la BD dans le DbContext, puis nous exécutons sur un terminal dans le projet la commande ```dotnet ef migrations add <nameForYourMigration>```, et l'appliquer en utilisant la commande ```dotnet ef database update```
 
-## Métrique de visualisation
-Les métriques de visualisation comportent le nombre d'issues qui comporte chaque colonne du Kanban, le nombre total d'issues dans le Kanban et l'heure à laquelle le Snapshot a été créé. Les métriques sur la visualisation sont pour le moment visibles dans la base de données. Une option pour accéder à ces données à partir de l'API est à prévoir.
+## Métriques de visualisation
+Les métriques de visualisation se base sur la prise de Snapshots. Ces snapshots sont une photographie de l'état du Kanban à un moment donnée, comportant le nom des colonnes, le nombre d'issues que chaque colonne comportait, le nombre total d'issues que le projet avait en ce moment, le nom du projet, l'ID du projet, le repository et le propriétaire, s'il y a lieu, auquel ce projet appartient, puis la date de quand le snapshot a été prise. Ces snapshots sont ensuite sauvegardés dans une base de données. Cela nous permet de garder trace de l'état du Kanban, et aussi utiliser d'utiliser ces mêmes données pour analyser d'autres métriques avec le temps.
+
+### Obtenir les snapshots à une date
+Il est possible de chercher tous les snapshots qui ont été pris à une date spécifique, s'il y a des snapshots à cette date. On peut chercher les snapshots d'un projet spécifique ou d'un repository en spéficique, tant qu'ils aient été sauvegardés à partir de notre API.
+
+### Métrique sur la moyenne de tâches entre deux dates
+Il est possible de calculer le nombre de tâches en moyenne entre deux dates. On obtient tous les snapshots entre les deux dates demandées, puis on calcule le nombre total de tâches de tous les snapshots divisé par le nombre de snapshots recueillis, puis on retourne la moyenne. En théorie, on possède un snapshot par jour, et donc la métrique de la moyenne est une donnée fiable qui peut nous aider à améliorer notre processus de travail.
+
+### Métrique sur le goulot d'étranglement du projet
+Il est possible de trouver quel est la colonne qui est pour notre projet, le goulot d'étranglement. On obtient cette métrique en obtenant tous les snapshots sauvegardés, on additionne chaque colonne avec ces données de tous les snapshots, puis on regarde quelle est la colonne qui a le plus grand nombre de tâches. On retourne après le pourcentage de ces tâches par rapport au total de tâches.
+
+### Métrique sur le goulot d'étranglement du projet entre deux dates
+C'est la même métrique que 'Métrique sur le goulot d'étranglement du projet', sauf qu'on peut effectuer la même opération entre deux dates, au lieu de tous les snapshots.
+
 
 ## Tests et démonstration 
 Nous avons utilisé le framework de tests NUnit, ainsi que la librairie Moq pour "moquer" des objets pour nos cas d'unit testing. Donc, nous faisons des tests unitaires pour certaines classes ayant un faible couplage, et des tests d'intégration pour celles auquel il est nécessaire d'intégrer plusieurs classes dans les tests. Par exemple, il est très difficile de faire des unit tests à certaines classes comme les controlleurs, et donc, un test d'intégration est nécessaire dans ce cas.
