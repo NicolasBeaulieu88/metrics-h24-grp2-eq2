@@ -11,12 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="483314e0-0eb2-4114-8afd-3cf85fc039ff" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../MetricsAPI-LOG680-Tests/UnitTest/SnapshotServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../MetricsAPI-LOG680-Tests/UnitTest/SnapshotServiceTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MetricsAPI-LOG680/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MetricsAPI-LOG680/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/SnapshotController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/SnapshotController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/ISnapshotService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/ISnapshotService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/SnapshotService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/SnapshotService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/SnapshotJSONController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/SnapshotJSONController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +54,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feature-metrique-visualisation-get",
+    "git-widget-placeholder": "feature-metrique-visualisation-json",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -154,6 +151,8 @@
       <workItem from="1706634892307" duration="4880000" />
       <workItem from="1706885108881" duration="1446000" />
       <workItem from="1707094751097" duration="4919000" />
+      <workItem from="1707149910276" duration="838000" />
+      <workItem from="1707153608946" duration="3317000" />
     </task>
     <servers />
   </component>
@@ -164,23 +163,6 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Controllers/SnapshotController.cs</url>
-          <line>48</line>
-          <properties documentPath="C:\Users\erick\OneDrive\Documents\_La_U\2023-2024\Hiver 2024\LOG680\Labos\metrics-h24-grp2-eq2\MetricsAPI-LOG680\Controllers\SnapshotController.cs" initialLine="48" containingFunctionPresentation="Method 'PostSnapshot'">
-            <startOffsets>
-              <option value="1595" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1617" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="LaunchSettings">
         <watch expression="new System.Linq.SystemCore_EnumerableDebugView&lt;System.Collections.Generic.KeyValuePair&lt;string, Newtonsoft.Json.Linq.JToken&gt;&gt;(this.&lt;graphQLResponse&gt;5__6.Data).Items[0].Value" />
