@@ -2,9 +2,9 @@
 
 namespace MetricsAPI_LOG680.Services
 {
-    public class PRMetricsServices 
+    public class PRMetricsService 
     {
-        public PRLeadTime CreatePRLeadTime(string prNumber, string username, string repository, DateTime savedDate, DateTime createdDate, DateTime closedDate, DateTime leadTime)
+        public PRLeadTime CreatePRLeadTime(string prNumber, string username, string repository, DateTime savedDate, DateTime createdDate, DateTime closedDate, TimeSpan leadTime)
         {
             var prLeadtime =  new PRLeadTime
             {
@@ -19,9 +19,9 @@ namespace MetricsAPI_LOG680.Services
             return prLeadtime;
         }
 
-        public GetPRMergedTime CreatePRMergedTime(string prNumber, string username, string repository, DateTime savedDate, DateTime mergedDate, DateTime mergedTime)
+        public PRMergedTime CreatePRMergedTime(string prNumber, string username, string repository, DateTime savedDate, DateTime mergedDate, TimeSpan mergedTime)
         {
-            var prMergedTime = new GetPRMergedTime
+            var prMergedTime = new PRMergedTime
             {
                 PrId = prNumber,
                 Username = username,

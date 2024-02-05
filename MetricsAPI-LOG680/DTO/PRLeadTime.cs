@@ -27,5 +27,5 @@ public class PRLeadTime
     public DateTime ClosedDate { get; set; }
     
     [Column("lead_time")]
-    public DateTime LeadTime { get; set; }
+    public TimeSpan LeadTime { get; set; }
 }

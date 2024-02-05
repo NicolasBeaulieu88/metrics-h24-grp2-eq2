@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 [Table("PRMergedTime")]
-public class GetPRMergedTime
+public class PRMergedTime
 {
     [System.ComponentModel.DataAnnotations.Key] 
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -27,5 +27,5 @@ public class GetPRMergedTime
     public DateTime MergedDate { get; set; }
     
     [Column("merged_time")]
-    public DateTime MergedTime { get; set; }
+    public TimeSpan MergedTime { get; set; }
 }

@@ -1,5 +1,6 @@
 using GraphQL.Client.Http;
 using MetricsAPI_LOG680.Helpers;
+using MetricsAPI_LOG680.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MetricsAPI_LOG680.Controllers;
@@ -11,13 +12,15 @@ public class PRController : ControllerBase
     private readonly ILogger<PRController> _logger;
     private readonly ApiDbContext _dbContext;
     private readonly IGraphQLHelper _graphQlHelper;
+    private readonly IPRMetricsService _prMetricsService;
 
 
-    public PRController(ILogger<PRController> logger, ApiDbContext dbContext, IGraphQLHelper graphQlHelper)
+    public PRController(ILogger<PRController> logger, ApiDbContext dbContext, IGraphQLHelper graphQlHelper, IPRMetricsService prMetricsService)
     {
         _logger = logger;
         _dbContext = dbContext;
         _graphQlHelper = graphQlHelper;
+        _prMetricsService = prMetricsService;
     }
 
     [HttpGet("GetPRIds")]
@@ -91,6 +94,10 @@ public class PRController : ControllerBase
 
             var leadTime = closedAt - createdAt;
 
+            var prLeadtime = _prMetricsService.CreatePRLeadTime(pr.number, username, repository, DateTime.Now, createdAt, closedAt, leadTime);
+            await _dbContext.PRLeadTimes.AddAsync(prLeadtime);
+            await _dbContext.SaveChangesAsync();
+
             return Ok(leadTime.Days + " days " + leadTime.Hours + " hours");
 
         }
@@ -135,6 +142,10 @@ public class PRController : ControllerBase
 
             var mergedTime = mergedAt - createdAt;
 
+            var prMergedTime = _prMetricsService.CreatePRMergedTime(pr.number, username, repository, DateTime.Now, mergedAt, mergedTime);
+            await _dbContext.PRMergedTimes.AddAsync(prMergedTime);
+            await _dbContext.SaveChangesAsync();
+
             return Ok(mergedTime.Days + " days " + mergedTime.Hours + " hours");
 
         }
@@ -176,6 +187,10 @@ public class PRController : ControllerBase
 
             int additions = int.Parse(pullRequest["additions"].ToString());
             int deletions = int.Parse(pullRequest["deletions"].ToString());
+
+            var prSize = _prMetricsService.CreatePRSize(pr.number, username, repository, DateTime.Now, additions, deletions, additions + deletions);
+            await _dbContext.PRSizes.AddAsync(prSize);
+            await _dbContext.SaveChangesAsync();
 
             return Ok(additions + deletions + " lines changed");
 
@@ -234,7 +249,14 @@ public class PRController : ControllerBase
                 }
 
             }
-            return Ok("Flow ratio: " + openedPR + " opened PRs / " + closedPR + " closed PRs, or "  + ((double)openedPR/(double)closedPR));
+
+            var flowRatio = (double)openedPR/(double)closedPR;
+
+            var prFlowRatio = _prMetricsService.CreatePRFlowRatio(username, repository, DateTime.Now, openedPR, closedPR, flowRatio);
+            await _dbContext.PRFlowRatios.AddAsync(prFlowRatio);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok("Flow ratio: " + openedPR + " opened PRs / " + closedPR + " closed PRs, or "  + flowRatio);
 
         }
         catch (Exception e)
@@ -283,6 +305,10 @@ public class PRController : ControllerBase
             int reviews = int.Parse(pullRequest["reviews"]["totalCount"].ToString());
             int reviewRequests = int.Parse(pullRequest["reviewRequests"]["totalCount"].ToString());
 
+            var prDiscussions = _prMetricsService.CreatePRDiscussions(pr.number, username, repository, DateTime.Now, comments, reviews, reviewRequests, comments + reviews + reviewRequests);
+            await _dbContext.PRDiscussions.AddAsync(prDiscussions);
+            await _dbContext.SaveChangesAsync();
+
             return Ok("Discussion: " + comments + " comments, " + reviews + " reviews, " + reviewRequests + " review requests, \nTotal: " + (comments + reviews + reviewRequests) + " interactions");
 
         }
@@ -295,6 +321,7 @@ public class PRController : ControllerBase
 
     
 }
+
 
 public class GithubToken
 {

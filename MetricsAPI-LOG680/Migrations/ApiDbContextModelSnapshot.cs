@@ -42,7 +42,7 @@ namespace MetricsAPI_LOG680.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("column_activity_count");
+                    b.ToTable("column_activity_count", (string)null);
                 });
 
             modelBuilder.Entity("MetricsAPI_LOG680.DTO.FinishedItemsTimeframe", b =>
@@ -68,7 +68,7 @@ namespace MetricsAPI_LOG680.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("finished_items_timeframe");
+                    b.ToTable("finished_items_timeframe", (string)null);
                 });
 
             modelBuilder.Entity("MetricsAPI_LOG680.DTO.LeadTimeTimeframe", b =>
@@ -99,7 +99,7 @@ namespace MetricsAPI_LOG680.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("lead_time_timeframe");
+                    b.ToTable("lead_time_timeframe", (string)null);
                 });
 
             modelBuilder.Entity("MetricsAPI_LOG680.DTO.Snapshot", b =>
@@ -141,7 +141,7 @@ namespace MetricsAPI_LOG680.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("snapshots");
+                    b.ToTable("snapshots", (string)null);
                 });
 
             modelBuilder.Entity("MetricsAPI_LOG680.DTO.TodoItem", b =>
@@ -164,7 +164,7 @@ namespace MetricsAPI_LOG680.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("todo_items");
+                    b.ToTable("todo_items", (string)null);
                 });
 #pragma warning restore 612, 618
         }
