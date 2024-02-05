@@ -1,7 +1,9 @@
 using GraphQL.Client.Http;
+using MetricsAPI_LOG680.DTO;
 using MetricsAPI_LOG680.Helpers;
 using MetricsAPI_LOG680.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 
 namespace MetricsAPI_LOG680.Controllers;
@@ -202,5 +204,47 @@ public class SnapshotController : ControllerBase
         }
 
         return null;
+    }
+    
+    [HttpGet("GetSnapshotOnDate")]
+    public async Task<ActionResult> GetSnapshotOnDate([FromQuery] DateTime startDate, string? token,
+                                                    string? owner, string? repository, string? projectId)
+    {
+        IEnumerable<Snapshot> snapshots;
+        var endDate = startDate.AddDays(1);
+        if (projectId != null)
+        {
+            snapshots = await _dbContext.Snapshots
+                .Where(s => s.Timestamps >= startDate.ToUniversalTime()
+                            && s.Timestamps <= endDate.ToUniversalTime())
+                .ToListAsync();
+        }
+        else if (repository != null && owner != null)
+        {
+            snapshots = await _dbContext.Snapshots
+                .Where(s => s.Timestamps >= startDate.ToUniversalTime()
+                            && s.Timestamps <= endDate.ToUniversalTime())
+                .ToListAsync();
+        }
+        else
+        {
+            return BadRequest("Missing required parameters");
+        }
+        
+        return Ok(snapshots);
+    }
+    
+    [HttpGet("GetSnapshotBetweenTwoDates")]
+    public async Task<ActionResult> GetTasksMeanBetweenTwoDates([FromQuery] DateTime startDate, [FromQuery] DateTime endDate,
+                                                string? token, string? owner, string? repository)
+    {
+        
+        
+        var snapshots = await _dbContext.Snapshots
+                            .Where(s => s.Timestamps >= startDate.ToUniversalTime()
+                                        && s.Timestamps <= endDate.ToUniversalTime())
+                            .ToListAsync();
+        
+        return Ok(snapshots);
     }
 }
