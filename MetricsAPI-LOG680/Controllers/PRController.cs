@@ -12,6 +12,7 @@ public class PRController : ControllerBase
     private readonly ApiDbContext _dbContext;
     private readonly IGraphQLHelper _graphQlHelper;
 
+
     public PRController(ILogger<PRController> logger, ApiDbContext dbContext, IGraphQLHelper graphQlHelper)
     {
         _logger = logger;
@@ -25,13 +26,15 @@ public class PRController : ControllerBase
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
         var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
         
-        var projectId = graphQLSettings.GetSection("projectId").Value;
 
+        var username = graphQLSettings.GetSection("username").Value;
+        var repository = graphQLSettings.GetSection("repository").Value;
+        
         var graphQLRequest = new GraphQLHttpRequest
         {
             Query = @"
                 query {
-                    repository(owner: ""NicolasBeaulieu88"", name: ""metrics-h24-grp2-eq2"") {
+                    repository(owner: """+ username + @""", name: """ + repository + @""") {
                         pullRequests(first: 100) {
                             nodes {
                                 number
@@ -60,13 +63,14 @@ public class PRController : ControllerBase
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
         var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
         
-        var projectId = graphQLSettings.GetSection("projectId").Value;
+        var username = graphQLSettings.GetSection("username").Value;
+        var repository = graphQLSettings.GetSection("repository").Value;
 
         var graphQLRequest = new GraphQLHttpRequest
         {
             Query = @"
                 query {
-                    repository(owner: ""NicolasBeaulieu88"", name: ""metrics-h24-grp2-eq2"") {
+                    repository(owner: """+ username + @""", name: """ + repository + @""") {
                         pullRequest(number: " + pr.number + @") {
                             number
                             createdAt
@@ -103,13 +107,14 @@ public class PRController : ControllerBase
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
         var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
         
-        var projectId = graphQLSettings.GetSection("projectId").Value;
+        var username = graphQLSettings.GetSection("username").Value;
+        var repository = graphQLSettings.GetSection("repository").Value;
 
         var graphQLRequest = new GraphQLHttpRequest
         {
             Query = @"
                 query {
-                    repository(owner: ""NicolasBeaulieu88"", name: ""metrics-h24-grp2-eq2"") {
+                    repository(owner: """+ username + @""", name: """ + repository + @""") {
                         pullRequest(number: " + pr.number + @") {
                             number
                             createdAt
@@ -146,13 +151,14 @@ public class PRController : ControllerBase
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
         var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
         
-        var projectId = graphQLSettings.GetSection("projectId").Value;
+        var username = graphQLSettings.GetSection("username").Value;
+        var repository = graphQLSettings.GetSection("repository").Value;
 
         var graphQLRequest = new GraphQLHttpRequest
         {
             Query = @"
                 query {
-                    repository(owner: ""NicolasBeaulieu88"", name: ""metrics-h24-grp2-eq2"") {
+                    repository(owner: """+ username + @""", name: """ + repository + @""") {
                         pullRequest(number: " + pr.number + @") {
                             number
                             additions
@@ -179,6 +185,113 @@ public class PRController : ControllerBase
             return BadRequest(e.Message);
         }
     }
+
+    [HttpGet("GetPRFlowRatio")] // PRFlowRatio = sum of opened pull requests over the sum of closed pull requests over the last 30 days
+    public async Task<IActionResult> GetPRFlowRatio([FromQuery]GithubToken githubToken){
+
+        var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
+        var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
+        
+        var username = graphQLSettings.GetSection("username").Value;
+        var repository = graphQLSettings.GetSection("repository").Value;
+
+        var graphQLRequest = new GraphQLHttpRequest
+        {
+            Query = @"
+                query {
+                    repository(owner: """+ username + @""", name: """ + repository + @""") {
+                        pullRequests(first: 100) {
+                            nodes {
+                                number
+                                createdAt
+                                closedAt
+                            }
+                        }
+                    }
+                }"
+        };
+        try
+        {
+            var graphQLResponse = await graphQLClient.SendQueryAsync<dynamic>(graphQLRequest);
+            
+            var pullRequests = graphQLResponse.Data["repository"]["pullRequests"]["nodes"];
+
+            int openedPR = 0;
+            int closedPR = 0;
+
+            foreach (var pr in pullRequests)
+            {
+                DateTime createdAt = DateTime.Parse(pr["createdAt"].ToString());
+                DateTime closedAt = DateTime.Now;
+
+                if (createdAt > DateTime.Now.AddDays(-30))
+                {
+                    openedPR++;
+                    if (!string.IsNullOrEmpty(pr["closedAt"]?.ToString()))
+                    {
+                        closedPR++;
+                    }
+                }
+
+            }
+            return Ok("Flow ratio: " + openedPR + " opened PRs / " + closedPR + " closed PRs, or "  + ((double)openedPR/(double)closedPR));
+
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpGet("GetPRDiscussion")] // PRDiscussion the sum of comments, reviews and review requests for a given PR
+    public async Task<IActionResult> GetPRDiscussion([FromQuery]GithubToken githubToken, [FromQuery]GraphQLPullRequest pr){
+
+        var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
+        var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
+        
+        var username = graphQLSettings.GetSection("username").Value;
+        var repository = graphQLSettings.GetSection("repository").Value;
+
+        var graphQLRequest = new GraphQLHttpRequest
+        {
+            Query = @"
+                query {
+                    repository(owner: """+ username + @""", name: """ + repository + @""") {
+                        pullRequest(number: " + pr.number + @") {
+                            number
+                            comments {
+                                totalCount
+                            }
+                            reviews {
+                                totalCount
+                            }
+                            reviewRequests {
+                                totalCount
+                            }
+                        }
+                    }
+                }"
+        };
+        try
+        {
+            var graphQLResponse = await graphQLClient.SendQueryAsync<dynamic>(graphQLRequest);
+            
+
+            var pullRequest = graphQLResponse.Data["repository"]["pullRequest"];
+
+            int comments = int.Parse(pullRequest["comments"]["totalCount"].ToString());
+            int reviews = int.Parse(pullRequest["reviews"]["totalCount"].ToString());
+            int reviewRequests = int.Parse(pullRequest["reviewRequests"]["totalCount"].ToString());
+
+            return Ok("Discussion: " + comments + " comments, " + reviews + " reviews, " + reviewRequests + " review requests, \nTotal: " + (comments + reviews + reviewRequests) + " interactions");
+
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+    
 
     
 }
