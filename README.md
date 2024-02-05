@@ -14,6 +14,11 @@ Pour notre projet Kanban, nous avons créé un total de 5 colonne pour bien sép
 - La colonne *Revue* sert à tout le travail qui a été accompli mais qui n'a pas été revue par un second memebre de l'équipe, nous demandons une revue pour tout les changement au code de l'application, mais non obligatoire au changement de documentation
 - Finalement, la colonne *Terminéé* sert de banque pour tout le travail accompli qui fait maintenant pars du projet, c'est la dernière étape de dééveloppement, lorsque la pull-request a été accepté ou la documentation écrite
 
+### Automatisation
+Nous avons mis en place un certain degré d'automatisation du Kanban avec les règles suivante:
+-Lorsqu'un issue est créé, un élément lié à l'issue est créé dans le Kanban et est placé sous la colonne *Backlog*
+-Lorsq'une pull request est accepté et lié à un issue, l'issue en question est ferméé et son élément dans le kanban est mis sous la colonne *Terminé*
+
 ## Création des étiquettes
 Pour les étiquettes nous avons créer une liste d'étiquette assez générique qui pourrait servir dans d'autre projet aussi. Voici la lsite:
 - *bug*
