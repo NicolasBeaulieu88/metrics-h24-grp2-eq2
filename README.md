@@ -59,6 +59,21 @@ Avec cette métrique on peut obtenir le nombre de tâches qui sont actives dans 
 Cette métrique donne comme résultat le nombre de tâches qui ont été accomplies pendant la période donnée par l'utilisateur. On peut par exemple obtenir le nombre de tâches qui ont été finies entre le 4 janvier 2024 et le 5 février 2024. 
 
 ## Métriques “pull-request”
+Il y a 5 différentes métriques pour les pull-request:
+### Lead time pour les pull-request
+Cette métrique est une soustraction du temps de fermeture d'une pull-request avec le temps d'ouverture de cette même pull-request. Cela permet d'avoir le nombre de temps en jours et en heure du temps que cette pull-request a passer ouverte avant d'être fermé
+
+### Merged time pour les pull-request
+Cette métrique est semblable au Lead time mais compare le temps d'ouverture de la pull-request avec le moment ou elle a été "merge" avec dans une autre branche. Une pull-request qui a été merge a été accepté tandis qu'il est possible de fermé une pull-request en la refusant sans accepté ses modifications
+
+### La taille d'une pull-request
+Cette métrique nous permet de connaitre la taille d'une pul-request. Pour obtenir cette taille, on fait l'addition du nombre de ligne ajouté au nombres de ligne de retiré.
+
+### Flow ratio d'un repository
+Cette métrique ne vise pas spécifiquement une pull-request, masi tout les pull-request des 30 derniers jours du repository. Cette métrique est le ratio des pull-request ouvertes par rapport aux pull request fermées. Le but étant un ratio de 1, cette métrique nous montre la balance des modifications écrite sur le projet par rapport aux modifications "accepté" ou déployé
+
+### Métrique sur les discussions
+Cettre métriques est la sommes de toute les discussions et communications qui on été fait sur une pull-request. Ceci comprends les commentaire, les reviews et les review requests. Avec cette métriques, il est possible d'observé l'efficacité des discussions dans les pull-requests.
 
 
 ## Base de données
