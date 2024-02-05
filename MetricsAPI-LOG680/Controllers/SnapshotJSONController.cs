@@ -92,6 +92,16 @@ public class SnapshotJSONController : ControllerBase
         return Ok();
     }
     
+    [HttpGet("GetSnapshotOnDate")]
+    public async Task<ActionResult> GetSnapshotOnDate([FromQuery] DateTime startDate,
+        string? owner, string? repository, string? projectId)
+    {
+        var endDate = startDate.AddDays(1);
+        var snapshots = await _snapshotJSONService.GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
+        
+        return Ok(snapshots);
+    }
+    
     private async Task<JToken?> QueryByProjectId(string projectId, GraphQLHttpClient graphQLClient)
     {
         var graphQLRequest = new GraphQLHttpRequest
@@ -191,15 +201,7 @@ public class SnapshotJSONController : ControllerBase
         return null;
     }
     
-    /*[HttpGet("GetSnapshotOnDate")]
-    public async Task<ActionResult> GetSnapshotOnDate([FromQuery] DateTime startDate,
-                                                    string? owner, string? repository, string? projectId)
-    {
-        var endDate = startDate.AddDays(1);
-        var snapshots = await _snapshotService.GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
-        
-        return Ok(snapshots);
-    }
+    /*
     
     [HttpGet("GetProjectTasksMeanBetweenTwoDates")]
     public async Task<ActionResult> GetProjectTasksMeanBetweenTwoDates(

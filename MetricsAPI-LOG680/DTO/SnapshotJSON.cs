@@ -26,4 +26,7 @@ public class SnapshotJSON
     
     [Column("timestamp")]
     public DateTime Timestamps { get; set; }
+    
+    [NotMapped]
+    public Dictionary<string, int> Columns_dict_data { get; set; }
 }

@@ -25,7 +25,12 @@ namespace MetricsAPI_LOG680.Services
 
         public async Task<IEnumerable<SnapshotJSON>> GetSnapshotsByDates(DateTime startDate, DateTime endDate, string? owner, string? repository, string? projectId)
         {
-            return await _repo.GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
+            var snapshots = await _repo.GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
+            foreach (var snapshot in snapshots)
+            {
+                snapshot.Columns_dict_data = JsonConvert.DeserializeObject<Dictionary<string, int>>(snapshot.Columns_data);
+            }
+            return snapshots;
         }
 
         public async Task<IEnumerable<SnapshotJSON>> GetAllSnapshots(string? owner, string? repository, string? projectId)
