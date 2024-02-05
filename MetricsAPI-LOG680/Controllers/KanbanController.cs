@@ -293,7 +293,7 @@ namespace MetricsAPI_LOG680.Controllers
                 var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
                 var graphQLClient = _graphQlHelper.GetClient(token);
 
-                projectId = graphQLSettings.GetSection("projectId").Value;
+                projectId ??= graphQLSettings.GetSection("projectId").Value;
                 owner ??= graphQLSettings.GetSection("username").Value;  
                 repo ??= graphQLSettings.GetSection("repository").Value;
                 
