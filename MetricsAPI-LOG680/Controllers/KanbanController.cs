@@ -286,7 +286,7 @@ namespace MetricsAPI_LOG680.Controllers
         }
 
         [HttpGet("GetLeadTimePerItem", Name = "GetLeadTimePerItem")]
-        public async Task<ActionResult> GetLeadTimePerItem([FromQuery] string token, [FromQuery] int issueNumber, [FromQuery] string repo)
+        public async Task<ActionResult> GetLeadTimePerItem([FromQuery] string token, [FromQuery] int issueNumber, [FromQuery] string repo, [FromQuery] string owner)
         {
             try
             {
@@ -294,7 +294,7 @@ namespace MetricsAPI_LOG680.Controllers
                 var graphQLClient = _graphQlHelper.GetClient(token);
 
                 var projectId = graphQLSettings.GetSection("projectId").Value;
-                var owner = graphQLSettings.GetSection("username").Value;  
+                owner ??= graphQLSettings.GetSection("username").Value;  
                 repo ??= graphQLSettings.GetSection("repository").Value;
                 
                 Console.WriteLine(issueNumber);
