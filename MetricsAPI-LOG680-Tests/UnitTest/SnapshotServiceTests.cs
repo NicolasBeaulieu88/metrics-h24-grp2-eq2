@@ -1,4 +1,7 @@
-﻿using MetricsAPI_LOG680.Services;
+﻿using MetricsAPI_LOG680;
+using MetricsAPI_LOG680.Repositories;
+using MetricsAPI_LOG680.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace MetricsAPI_LOG680_Tests;
 
@@ -7,12 +10,15 @@ public class SnapshotServiceTests
 {
     private DateTime _date;
     private ISnapshotService _snapshotService;
+    private ISnapshotRepository _snapshotRepository;
 
     [SetUp]
     public void Setup()
     {
         _date = DateTime.UtcNow;
-        _snapshotService = new SnapshotService();
+        var dbContextMock = new Mock<ApiDbContext>(new DbContextOptions<ApiDbContext>());
+        _snapshotRepository = new SnapshotRepository(dbContextMock.Object);
+        _snapshotService = new SnapshotService(_snapshotRepository);
     }
 
     [Test]
