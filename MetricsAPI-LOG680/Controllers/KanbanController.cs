@@ -27,14 +27,14 @@ namespace MetricsAPI_LOG680.Controllers
         }
 
         [HttpGet("GetColumnTasks", Name = "GetColumnTasks")]
-        public async Task<ActionResult> GetColumnTasks([FromQuery] string token, [FromQuery] string columnName)
+        public async Task<ActionResult> GetColumnTasks([FromQuery] string token, [FromQuery] string columnName, [FromQuery] string projectId)
         {
             try
             {
                 var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
                 var graphQLClient = _graphQlHelper.GetClient(token);
 
-                var projectId = graphQLSettings.GetSection("projectId").Value;
+                projectId ??= graphQLSettings.GetSection("projectId").Value;
 
                 var graphQLRequest = new GraphQLHttpRequest
                 {
@@ -106,14 +106,14 @@ namespace MetricsAPI_LOG680.Controllers
         }
     
         [HttpGet("GetTerminatedItemsCount", Name = "GetTerminatedItemsCount")]
-        public async Task<ActionResult> GetTerminatedItemsCount([FromQuery] string token, [FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        public async Task<ActionResult> GetTerminatedItemsCount([FromQuery] string token, [FromQuery] string projectId, [FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
         {
             try
             {
                 var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
                 var graphQLClient = _graphQlHelper.GetClient(token);
 
-                var projectId = graphQLSettings.GetSection("projectId").Value;
+                projectId ??= graphQLSettings.GetSection("projectId").Value;
 
                 var graphQLRequest = new GraphQLHttpRequest
                 {
@@ -195,14 +195,14 @@ namespace MetricsAPI_LOG680.Controllers
         }
 
         [HttpGet("GetLeadTimeDoneItemsTimeframe", Name = "GetLeadTimeDoneItemsTimeframe")]
-        public async Task<ActionResult> GetLeadTimeDoneItemsTimeframe([FromQuery] string token, [FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        public async Task<ActionResult> GetLeadTimeDoneItemsTimeframe([FromQuery] string token, [FromQuery] string projectId, [FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
         {
             try
             {
                 var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
                 var graphQLClient = _graphQlHelper.GetClient(token);
 
-                var projectId = graphQLSettings.GetSection("projectId").Value;
+                projectId = graphQLSettings.GetSection("projectId").Value;
 
                 var graphQLRequest = new GraphQLHttpRequest
                 {
@@ -286,14 +286,14 @@ namespace MetricsAPI_LOG680.Controllers
         }
 
         [HttpGet("GetLeadTimePerItem", Name = "GetLeadTimePerItem")]
-        public async Task<ActionResult> GetLeadTimePerItem([FromQuery] string token, [FromQuery] int issueNumber, [FromQuery] string repo, [FromQuery] string owner)
+        public async Task<ActionResult> GetLeadTimePerItem([FromQuery] string token, [FromQuery] string projectId, [FromQuery] int issueNumber, [FromQuery] string repo, [FromQuery] string owner)
         {
             try
             {
                 var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
                 var graphQLClient = _graphQlHelper.GetClient(token);
 
-                var projectId = graphQLSettings.GetSection("projectId").Value;
+                projectId = graphQLSettings.GetSection("projectId").Value;
                 owner ??= graphQLSettings.GetSection("username").Value;  
                 repo ??= graphQLSettings.GetSection("repository").Value;
                 
