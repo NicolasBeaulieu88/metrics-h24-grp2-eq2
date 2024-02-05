@@ -16,6 +16,12 @@ Pour exécuter une migration dans la base de données, veuillez vous référer �
 
 
 ## Création des milestones
+Il y a 3 Milestones pour notre projet: 
+- *Labo 1*
+- *Labo 2*
+- *Labo 3*
+
+Ces milestones nous permettent de savoir pour quelle laboratoire chaque "Issue" a été créee et donc maintenir un ordre dans le tableau Kanban. 
 
 
 ## Politiques de branches
@@ -25,7 +31,18 @@ Pour exécuter une migration dans la base de données, veuillez vous référer �
 Nous avons opté pour faire un API en utilisant le framework .Net. Il s'agit d'un framework pour le développement entre autre d'applications web ou API, codés avec le langage de programmation C#. Nous utilisons aussi Visual Studio ou Rider pour compiler et exécuter le projet.
 
 ## Métriques Kanban
+Il y a 4 différentes métriques Kanban: 
+### Lead Time pour un Issue
+Cette métrique permet d'obtenir le temps pour une tâche donnée, si la tâche a été "closed", le temps est calculé avec la date de fermeture et la date de création. Cependant, si la tâche n'est pas finie, le temps est calculé entre la date de création et la date de la requête. 
 
+### Lead Time pour les tâches finies dans une période donnée
+Cette métrique obtient toutes les tâches qui ont été finies dans l'intervalle de temps choisi par l'utilisateur et calcule le temps que ces tâches ont pris de leur création à leur fermeture. 
+
+### Nombre de tâches pour une colonne donnée
+Avec cette métrique on peut obtenir le nombre de tâches qui sont actives dans une colonne du tableau Kanban, la colonne doit être choisie par l'utilisateur. Par exemple, on pourrait savoir combien de tâches sont encore dans le backlog. 
+
+### Nombre de tâches complétées pour une période donnée
+Cette métrique donne comme résultat le nombre de tâches qui ont été accomplies pendant la période donnée par l'utilisateur. On peut par exemple obtenir le nombre de tâches qui ont été finies entre le 4 janvier 2024 et le 5 février 2024. 
 
 ## Métriques “pull-request”
 
