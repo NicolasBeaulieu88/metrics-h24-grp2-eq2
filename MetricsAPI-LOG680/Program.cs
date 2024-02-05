@@ -21,6 +21,7 @@ builder.Services.AddSingleton(Configuration);
 builder.Services.AddScoped<IGraphQLHelper, GraphQLHelper>();
 builder.Services.AddScoped<ISnapshotService, SnapshotService>();
 builder.Services.AddScoped<ISnapshotRepository, SnapshotRepository>();
+builder.Services.AddScoped<IPRMetricsService, PRMetricsService>();
 
 var app = builder.Build();
 

@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
+namespace MetricsAPI_LOG680.DTO;
+
 [Table("PRSize")]
 public class PRSize
 {

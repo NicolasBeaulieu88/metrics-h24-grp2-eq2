@@ -1,5 +1,8 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
+namespace MetricsAPI_LOG680.DTO;
+
+
 [Table("PRLeadTime")]
 public class PRLeadTime
 {
@@ -27,5 +30,5 @@ public class PRLeadTime
     public DateTime ClosedDate { get; set; }
     
     [Column("lead_time")]
-    public DateTime LeadTime { get; set; }
+    public TimeSpan LeadTime { get; set; }
 }

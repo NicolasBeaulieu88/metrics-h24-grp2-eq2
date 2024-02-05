@@ -1,5 +1,8 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
+namespace MetricsAPI_LOG680.DTO;
+
+
 [Table("PRDiscussions")]
 public class PRDiscussions
 {

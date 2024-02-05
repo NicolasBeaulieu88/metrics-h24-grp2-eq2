@@ -2,32 +2,32 @@
 
 namespace MetricsAPI_LOG680.Services
 {
-    public class PRMetricsServices 
+    public class PRMetricsService : IPRMetricsService
     {
-        public PRLeadTime CreatePRLeadTime(string prNumber, string username, string repository, DateTime savedDate, DateTime createdDate, DateTime closedDate, DateTime leadTime)
+        public PRLeadTime CreatePRLeadTime(string prNumber, string username, string repository, DateTime savedDate, DateTime createdDate, DateTime closedDate, TimeSpan leadTime)
         {
             var prLeadtime =  new PRLeadTime
             {
                 PrId = prNumber,
                 Username = username,
                 Repository = repository,
-                SavedDate = savedDate,
-                CreatedDate = createdDate,
-                ClosedDate = closedDate,
+                SavedDate = savedDate.ToUniversalTime(),
+                CreatedDate = createdDate.ToUniversalTime(),
+                ClosedDate = closedDate.ToUniversalTime(),
                 LeadTime = leadTime
             };
             return prLeadtime;
         }
 
-        public GetPRMergedTime CreatePRMergedTime(string prNumber, string username, string repository, DateTime savedDate, DateTime mergedDate, DateTime mergedTime)
+        public PRMergedTime CreatePRMergedTime(string prNumber, string username, string repository, DateTime savedDate, DateTime mergedDate, TimeSpan mergedTime)
         {
-            var prMergedTime = new GetPRMergedTime
+            var prMergedTime = new PRMergedTime
             {
                 PrId = prNumber,
                 Username = username,
                 Repository = repository,
-                SavedDate = savedDate,
-                MergedDate = mergedDate,
+                SavedDate = savedDate.ToUniversalTime(),
+                MergedDate = mergedDate.ToUniversalTime(),
                 MergedTime = mergedTime
             };
             return prMergedTime;
@@ -40,7 +40,7 @@ namespace MetricsAPI_LOG680.Services
                 PrId = prNumber,
                 Username = username,
                 Repository = repository,
-                SavedDate = savedDate,
+                SavedDate = savedDate.ToUniversalTime(),
                 Comments = comments,
                 Reviews = reviews,
                 ReviewRequests = reviewRequests,
@@ -55,7 +55,7 @@ namespace MetricsAPI_LOG680.Services
             {
                 Username = username,
                 Repository = repository,
-                SavedDate = savedDate,
+                SavedDate = savedDate.ToUniversalTime(),
                 OpenedPR = totalItemsOpened,
                 ClosedPR = totalItemsClosed,
                 FlowRatio = flowRatio
@@ -70,7 +70,7 @@ namespace MetricsAPI_LOG680.Services
                 PrId = prNumber,
                 Username = username,
                 Repository = repository,
-                SavedDate = savedDate,
+                SavedDate = savedDate.ToUniversalTime(),
                 Additions = additions,
                 Deletions = deletions,
                 TotalChanges = totalChanges
