@@ -11,9 +11,9 @@ namespace MetricsAPI_LOG680.Services
                 PrId = prNumber,
                 Username = username,
                 Repository = repository,
-                SavedDate = savedDate,
-                CreatedDate = createdDate,
-                ClosedDate = closedDate,
+                SavedDate = savedDate.ToUniversalTime(),
+                CreatedDate = createdDate.ToUniversalTime(),
+                ClosedDate = closedDate.ToUniversalTime(),
                 LeadTime = leadTime
             };
             return prLeadtime;
@@ -26,8 +26,8 @@ namespace MetricsAPI_LOG680.Services
                 PrId = prNumber,
                 Username = username,
                 Repository = repository,
-                SavedDate = savedDate,
-                MergedDate = mergedDate,
+                SavedDate = savedDate.ToUniversalTime(),
+                MergedDate = mergedDate.ToUniversalTime(),
                 MergedTime = mergedTime
             };
             return prMergedTime;
@@ -40,7 +40,7 @@ namespace MetricsAPI_LOG680.Services
                 PrId = prNumber,
                 Username = username,
                 Repository = repository,
-                SavedDate = savedDate,
+                SavedDate = savedDate.ToUniversalTime(),
                 Comments = comments,
                 Reviews = reviews,
                 ReviewRequests = reviewRequests,
@@ -55,7 +55,7 @@ namespace MetricsAPI_LOG680.Services
             {
                 Username = username,
                 Repository = repository,
-                SavedDate = savedDate,
+                SavedDate = savedDate.ToUniversalTime(),
                 OpenedPR = totalItemsOpened,
                 ClosedPR = totalItemsClosed,
                 FlowRatio = flowRatio
@@ -70,7 +70,7 @@ namespace MetricsAPI_LOG680.Services
                 PrId = prNumber,
                 Username = username,
                 Repository = repository,
-                SavedDate = savedDate,
+                SavedDate = savedDate.ToUniversalTime(),
                 Additions = additions,
                 Deletions = deletions,
                 TotalChanges = totalChanges
