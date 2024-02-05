@@ -54,6 +54,7 @@ public class SnapshotController : ControllerBase
         else if (repository != null && owner != null)
         {
             projectsNode = await QueryByRepoAndOwner(repository, owner, graphQLClient);
+            projectId = projectsNode["id"].Value<string>();
         }
         else
         {
@@ -61,7 +62,7 @@ public class SnapshotController : ControllerBase
         }
 
         var title = projectsNode["title"].ToString();
-        projectId = projectsNode["id"].Value<string>();
+        
         
         foreach (var item in projectsNode["items"]["nodes"])
         {
@@ -101,9 +102,8 @@ public class SnapshotController : ControllerBase
 
         snapshot.Project_id = projectId;
         snapshot.Title = title;
-            
-        await _dbContext.Snapshots.AddAsync(snapshot);
-        await _dbContext.SaveChangesAsync();
+
+        await _snapshotService.PostSnapshot(snapshot);
         
         return Ok();
     }
@@ -113,7 +113,7 @@ public class SnapshotController : ControllerBase
                                                     string? owner, string? repository, string? projectId)
     {
         var endDate = startDate.AddDays(1);
-        var snapshots = await GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
+        var snapshots = await _snapshotService.GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
         
         return Ok(snapshots);
     }
@@ -123,7 +123,7 @@ public class SnapshotController : ControllerBase
                             [FromQuery] DateTime startDate, [FromQuery] DateTime endDate,
                             string? owner, string? repository, string? projectId)
     {
-        var snapshots = await GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
+        var snapshots = await _snapshotService.GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
 
         int moy = 0;
         foreach (var snapshot in snapshots)
@@ -137,7 +137,7 @@ public class SnapshotController : ControllerBase
     [HttpGet("GetProjectBottleneck")]
     public async Task<ActionResult> GetProjectBottleneck(string? owner, string? repository, string? projectId)
     {
-        var snapshots = await GetAllSnapshots(owner, repository, projectId);
+        var snapshots = await _snapshotService.GetAllSnapshots(owner, repository, projectId);
         var sortedSnaps = SortSnapshotsByGreaterNumberIssues(snapshots);
         return Ok(GetBottleneck(sortedSnaps));
     }
@@ -147,7 +147,7 @@ public class SnapshotController : ControllerBase
                                     [FromQuery] DateTime startDate, [FromQuery] DateTime endDate,
                                     string? owner, string? repository, string? projectId)
     {
-        var snapshots = await GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
+        var snapshots = await _snapshotService.GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
         var sortedSnaps = SortSnapshotsByGreaterNumberIssues(snapshots);
         return Ok(GetBottleneck(sortedSnaps));
     }
@@ -281,48 +281,6 @@ public class SnapshotController : ControllerBase
         var bottleneck = sortedSnaps.First();
         var btlnckPrctng = GetMoyenneIssues(bottleneck.Value, total) * 100;
         return $"Le goulot d'étranglement dans le Kanban est {bottleneck.Key} : {btlnckPrctng.ToString("F2")}%";
-    }
-
-    private async Task<IEnumerable<Snapshot>> GetSnapshotsByDates(DateTime startDate, DateTime endDate,
-                                            string? owner, string? repository, string? projectId)
-    {
-        if (projectId != null)
-        {
-            return await _dbContext.Snapshots
-                .Where(s => s.Project_id == projectId 
-                        && s.Timestamps >= startDate.ToUniversalTime()
-                        && s.Timestamps <= endDate.ToUniversalTime())
-                .ToListAsync();
-        }
-        if (repository != null && owner != null)
-        {
-            return await _dbContext.Snapshots
-                .Where(s => s.Repository_name == repository && s.Owner == owner
-                        && s.Timestamps >= startDate.ToUniversalTime()
-                        && s.Timestamps <= endDate.ToUniversalTime())
-                .ToListAsync();
-        }
-        return await _dbContext.Snapshots
-                                .Where(s => s.Timestamps >= startDate.ToUniversalTime()
-                                            && s.Timestamps <= endDate.ToUniversalTime())
-                                .ToListAsync();
-    }
-
-    private async Task<IEnumerable<Snapshot>> GetAllSnapshots(string? owner, string? repository, string? projectId)
-    {
-        if (projectId != null)
-        {
-            return await _dbContext.Snapshots
-                        .Where(s => s.Project_id == projectId)
-                        .ToListAsync();
-        }
-        if (repository != null && owner != null)
-        {
-            return await _dbContext.Snapshots
-                        .Where(s => s.Repository_name == repository && s.Owner == owner)
-                        .ToListAsync();
-        }
-        return await _dbContext.Snapshots.ToListAsync();
     }
     
     private int GetMoyenneIssues(int moy, int nbItems)
