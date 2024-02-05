@@ -286,7 +286,7 @@ namespace MetricsAPI_LOG680.Controllers
         }
 
         [HttpGet("GetLeadTimePerItem", Name = "GetLeadTimePerItem")]
-        public async Task<ActionResult> GetLeadTimePerItem([FromQuery] string token, [FromQuery] int issueNumber)
+        public async Task<ActionResult> GetLeadTimePerItem([FromQuery] string token, [FromQuery] int issueNumber, [FromQuery] string repo)
         {
             try
             {
@@ -295,7 +295,7 @@ namespace MetricsAPI_LOG680.Controllers
 
                 var projectId = graphQLSettings.GetSection("projectId").Value;
                 var owner = graphQLSettings.GetSection("username").Value;  
-                var repo = graphQLSettings.GetSection("repository").Value;
+                repo ??= graphQLSettings.GetSection("repository").Value;
                 
                 Console.WriteLine(issueNumber);
                 var graphQLRequest = new GraphQLHttpRequest
@@ -338,7 +338,8 @@ namespace MetricsAPI_LOG680.Controllers
                     var leadTime = new LeadTimePerIssue
                     {
                         IssueNumber = issueNumber.ToString(),
-                        LeadTime = (int)lead_time.TotalDays
+                        LeadTime = (int)lead_time.TotalDays,
+                        IsDone = closed
                     };
                     await _dbContext.LeadTimePerIssues.AddAsync(leadTime);
                     await _dbContext.SaveChangesAsync();

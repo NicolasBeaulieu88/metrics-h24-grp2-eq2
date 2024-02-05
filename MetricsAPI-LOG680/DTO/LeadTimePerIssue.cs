@@ -17,4 +17,7 @@ public class LeadTimePerIssue
 
     [Column("lead_time")]
     public int LeadTime { get; set; }
+
+    [Column("is_done")]
+    public bool IsDone { get; set; }
 }

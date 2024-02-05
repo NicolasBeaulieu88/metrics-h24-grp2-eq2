@@ -80,6 +80,10 @@ namespace MetricsAPI_LOG680.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("IsDone")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_done");
+
                     b.Property<string>("IssueNumber")
                         .IsRequired()
                         .HasColumnType("text")
