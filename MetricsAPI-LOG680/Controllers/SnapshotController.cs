@@ -13,7 +13,6 @@ namespace MetricsAPI_LOG680.Controllers;
 public class SnapshotController : ControllerBase
 {
     private readonly ILogger<TestController> _logger;
-    private readonly ApiDbContext _dbContext;
     private readonly IGraphQLHelper _graphQlHelper;
     private readonly ISnapshotService _snapshotService;
     
@@ -30,10 +29,9 @@ public class SnapshotController : ControllerBase
     private int _revueCmpt;
     private int _termineeCmpt;
 
-    public SnapshotController(ILogger<TestController> logger, ApiDbContext dbContext, IGraphQLHelper graphQlHelper, ISnapshotService snapshotService)
+    public SnapshotController(ILogger<TestController> logger, IGraphQLHelper graphQlHelper, ISnapshotService snapshotService)
     {
         _logger = logger;
-        _dbContext = dbContext;
         _graphQlHelper = graphQlHelper;
         _snapshotService = snapshotService;
     }
