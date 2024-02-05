@@ -25,7 +25,21 @@ Ces milestones nous permettent de savoir pour quelle laboratoire chaque "Issue" 
 
 
 ## Politiques de branches
+Pour ce projet, nous avons utilisé la méthodologie GitHub Flow afin de rationaliser notre processus de développement. Voici une brève explication de ce que cela implique :
 
+### Mise en œuvre de GitHub Flow :
+#### Branchement :
+- Chaque fonctionnalité ou correction de bogue commence par la création d'une nouvelle branche.
+- Les branches maintiennent les modifications isolées jusqu'à ce qu'elles soient prêtes à être intégrées.
+#### Commits :
+- Les développeurs effectuent de petits changements incrémentiels avec des commits réguliers sur la branche.
+- Cette pratique facilite la collaboration et fournit une chronologie claire du développement.
+#### Demandes de fusion (PR) :
+- Lorsqu'une fonctionnalité ou une correction est terminée, une demande de fusion est lancée.
+- Les PR servent de points de discussion pour la revue de code, les retours et les tests.
+#### Fusion :
+- Après approbation, la branche est fusionnée dans la base de code principale.
+- Cela garantit une intégration en douceur sans perturber la stabilité du code existant.
 
 ## Création de l’application
 Nous avons opté pour faire un API en utilisant le framework .Net. Il s'agit d'un framework pour le développement entre autre d'applications web ou API, codés avec le langage de programmation C#. Nous utilisons aussi Visual Studio ou Rider pour compiler et exécuter le projet.
