@@ -92,7 +92,7 @@ public class SnapshotController : ControllerBase
                                                     _enCoursCmpt, _revueCmpt,
                                                     _termineeCmpt, DateTime.UtcNow);
 
-        if (isProjectId!)
+        if (!isProjectId)
         {
             snapshot.Repository_name = repository;
             snapshot.Owner = owner;
@@ -207,44 +207,53 @@ public class SnapshotController : ControllerBase
     }
     
     [HttpGet("GetSnapshotOnDate")]
-    public async Task<ActionResult> GetSnapshotOnDate([FromQuery] DateTime startDate, string? token,
+    public async Task<ActionResult> GetSnapshotOnDate([FromQuery] DateTime startDate,
                                                     string? owner, string? repository, string? projectId)
     {
-        IEnumerable<Snapshot> snapshots;
         var endDate = startDate.AddDays(1);
-        if (projectId != null)
-        {
-            snapshots = await _dbContext.Snapshots
-                .Where(s => s.Timestamps >= startDate.ToUniversalTime()
-                            && s.Timestamps <= endDate.ToUniversalTime())
-                .ToListAsync();
-        }
-        else if (repository != null && owner != null)
-        {
-            snapshots = await _dbContext.Snapshots
-                .Where(s => s.Timestamps >= startDate.ToUniversalTime()
-                            && s.Timestamps <= endDate.ToUniversalTime())
-                .ToListAsync();
-        }
-        else
-        {
-            return BadRequest("Missing required parameters");
-        }
+        var snapshots = await GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
         
         return Ok(snapshots);
     }
     
-    [HttpGet("GetSnapshotBetweenTwoDates")]
-    public async Task<ActionResult> GetTasksMeanBetweenTwoDates([FromQuery] DateTime startDate, [FromQuery] DateTime endDate,
-                                                string? token, string? owner, string? repository)
+    [HttpGet("GetProjectTasksMeanBetweenTwoDates")]
+    public async Task<ActionResult> GetProjectTasksMeanBetweenTwoDates(
+                            [FromQuery] DateTime startDate, [FromQuery] DateTime endDate,
+                            string? owner, string? repository, string? projectId)
     {
+        var snapshots = await GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
+
+        int moy = 0;
+        foreach (var snapshot in snapshots)
+        {
+            moy += snapshot.Total_items;
+        }
         
-        
-        var snapshots = await _dbContext.Snapshots
-                            .Where(s => s.Timestamps >= startDate.ToUniversalTime()
-                                        && s.Timestamps <= endDate.ToUniversalTime())
-                            .ToListAsync();
-        
-        return Ok(snapshots);
+        return Ok($"Moyenne de issues entre {startDate} et {endDate} : {moy / snapshots.Count()} issues");
+    }
+
+    private async Task<IEnumerable<Snapshot>> GetSnapshotsByDates(DateTime startDate, DateTime endDate,
+                                            string? owner, string? repository, string? projectId)
+    {
+        if (projectId != null)
+        {
+            return await _dbContext.Snapshots
+                .Where(s => s.Project_id == projectId 
+                        && s.Timestamps >= startDate.ToUniversalTime()
+                        && s.Timestamps <= endDate.ToUniversalTime())
+                .ToListAsync();
+        }
+        if (repository != null && owner != null)
+        {
+            return await _dbContext.Snapshots
+                .Where(s => s.Repository_name == repository && s.Owner == owner
+                        && s.Timestamps >= startDate.ToUniversalTime()
+                        && s.Timestamps <= endDate.ToUniversalTime())
+                .ToListAsync();
+        }
+        return await _dbContext.Snapshots
+                                .Where(s => s.Timestamps >= startDate.ToUniversalTime()
+                                            && s.Timestamps <= endDate.ToUniversalTime())
+                                .ToListAsync();
     }
 }
