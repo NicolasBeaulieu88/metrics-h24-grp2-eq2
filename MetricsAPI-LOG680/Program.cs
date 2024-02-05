@@ -22,6 +22,8 @@ builder.Services.AddScoped<IGraphQLHelper, GraphQLHelper>();
 builder.Services.AddScoped<ISnapshotService, SnapshotService>();
 builder.Services.AddScoped<ISnapshotRepository, SnapshotRepository>();
 builder.Services.AddScoped<IPRMetricsService, PRMetricsService>();
+builder.Services.AddScoped<ISnapshotJSONService, SnapshotJSONService>();
+builder.Services.AddScoped<ISnapshotJSONRepository, SnapshotJSONRepository>();
 
 var app = builder.Build();
 
