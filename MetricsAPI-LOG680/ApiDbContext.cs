@@ -12,4 +12,5 @@ public class ApiDbContext : DbContext
     public DbSet<ColumnActivityCount> ColumnActivityCounts { get; set; }
     public DbSet<FinishedItemsTimeframe> FinishedItemsTimeframes { get; set; }
     public DbSet<LeadTimeTimeframe> LeadTimeTimeframes { get; set; }
+    public DbSet<LeadTimePerIssue> LeadTimePerIssues { get; set; }
 }

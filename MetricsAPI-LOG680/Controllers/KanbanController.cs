@@ -284,5 +284,79 @@ namespace MetricsAPI_LOG680.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+
+        [HttpGet("GetLeadTimePerItem", Name = "GetLeadTimePerItem")]
+        public async Task<ActionResult> GetLeadTimePerItem([FromQuery] string token, [FromQuery] int issueNumber, [FromQuery] string repo, [FromQuery] string owner)
+        {
+            try
+            {
+                var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
+                var graphQLClient = _graphQlHelper.GetClient(token);
+
+                var projectId = graphQLSettings.GetSection("projectId").Value;
+                owner ??= graphQLSettings.GetSection("username").Value;  
+                repo ??= graphQLSettings.GetSection("repository").Value;
+                
+                Console.WriteLine(issueNumber);
+                var graphQLRequest = new GraphQLHttpRequest
+                {
+                    Query = @"
+                        query ($issueNumber: Int!, $owner: String!, $repo: String!){
+                            repository(owner: $owner, name: $repo) {
+                                issue(number: $issueNumber) {                                      
+                                    createdAt                                     
+                                    closed
+                                    closedAt                                    
+                                }
+                            }
+                        }",
+                    Variables = new
+                    {
+                        issueNumber,
+                        owner,
+                        repo
+                    }
+                };
+                try
+                {
+                    var graphQLResponse = await graphQLClient.SendQueryAsync<dynamic>(graphQLRequest);
+
+                    var issue = graphQLResponse.Data["repository"]["issue"];
+                    
+                    DateTime createdAt = DateTime.Parse(issue["createdAt"].ToString());                
+                    bool closed = issue["closed"];
+                    
+                    DateTime closedAt;
+                    if (closed) {
+                        closedAt = DateTime.Parse(issue["closedAt"].ToString());
+                    } else {
+                        closedAt = DateTime.Now;
+                    }
+
+                    var lead_time = closedAt - createdAt;
+
+                    var leadTime = new LeadTimePerIssue
+                    {
+                        IssueNumber = issueNumber.ToString(),
+                        LeadTime = (int)lead_time.TotalDays,
+                        IsDone = closed
+                    };
+                    await _dbContext.LeadTimePerIssues.AddAsync(leadTime);
+                    await _dbContext.SaveChangesAsync();
+                    
+                    return Ok(issueNumber + ": " + lead_time);
+                }
+                catch (Exception e)
+                {
+                    return BadRequest(e.Message);
+                }
+            }
+            catch (Exception e)
+            {   
+                _logger.LogError(e, "Error while retrieving terminated items count");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
     }
 }
