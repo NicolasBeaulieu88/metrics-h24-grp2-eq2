@@ -26,6 +26,6 @@ public class PRSize
     [Column("deletions")]
     public int Deletions { get; set; }
 
-    [Column("size")]
-    public int Size { get; set; }
+    [Column("totalChanges")]
+    public int TotalChanges { get; set; }
 }
