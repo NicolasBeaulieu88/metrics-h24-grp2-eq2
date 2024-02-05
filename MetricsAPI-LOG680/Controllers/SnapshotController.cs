@@ -26,7 +26,6 @@ public class SnapshotController : ControllerBase
     private int _enCoursCmpt;
     private int _revueCmpt;
     private int _termineeCmpt;
-    private int _totalCmpt;
 
     public SnapshotController(ILogger<TestController> logger, ApiDbContext dbContext, IGraphQLHelper graphQlHelper, ISnapshotService snapshotService)
     {
@@ -37,18 +36,68 @@ public class SnapshotController : ControllerBase
     }
     
     [HttpPost(Name = "PostSnapshot")]
-    public async Task<ActionResult> PostSnapshot(SnapshotToken snapshotToken)
+    public async Task<ActionResult> PostSnapshot(string? token, string? repository, string? owner, string? projectId)
     {
-        var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
-        var graphQLClient = _graphQlHelper.GetClient(snapshotToken.token);
+        var graphQLClient = _graphQlHelper.GetClient(token);
+
+        JToken? projectsNode;
+
+        if (projectId != null)
+        {
+            projectsNode = await QueryByProjectId(projectId, graphQLClient);
+        }
+        else if (repository != null && owner != null)
+        {
+            projectsNode = await QueryByRepoAndOwner(repository, owner, graphQLClient);
+        }
+        else
+        {
+            return BadRequest("Missing required parameters");
+        }
         
-        var projectId = graphQLSettings.GetSection("projectId").Value;
+        foreach (var item in projectsNode)
+        {
+            var columnName = item["fieldValues"]["nodes"].Last["name"].Value<string>();
+
+            switch (columnName)
+            {
+                case BACKLOG:
+                    _backlogCmpt++;
+                    break;
+                case A_FAIRE:
+                    _aFaireCmpt++;
+                    break;
+                case EN_COURS:
+                    _enCoursCmpt++;
+                    break;
+                case REVUE:
+                    _revueCmpt++;
+                    break;
+                case TERMINEE:
+                    _termineeCmpt++;
+                    break;
+                default:
+                    throw new Exception("Column Type was not found");
+            }
+        }
+
+        var snapshot = _snapshotService.CreateSnapshot(_backlogCmpt, _aFaireCmpt,
+                                                    _enCoursCmpt, _revueCmpt,
+                                                    _termineeCmpt, DateTime.UtcNow);
+            
+        await _dbContext.Snapshots.AddAsync(snapshot);
+        await _dbContext.SaveChangesAsync();
         
+        return Ok();
+    }
+
+    private async Task<JToken?> QueryByProjectId(string projectId, GraphQLHttpClient graphQLClient)
+    {
         var graphQLRequest = new GraphQLHttpRequest
         {
             Query = @"
-                query {
-                  node(id: """ + projectId + @""") {
+                query($projectId: ID!) {
+                  node(id: $projectId) {
                     ... on ProjectV2 {
                       items(first: 100) {
                         totalCount
@@ -64,7 +113,11 @@ public class SnapshotController : ControllerBase
                       }
                     }
                   }
-                }"
+                }",
+            Variables = new
+            {
+                projectId
+            }
         };
 
         try
@@ -72,50 +125,65 @@ public class SnapshotController : ControllerBase
             var graphQLResponse = await graphQLClient.SendQueryAsync<JObject>(graphQLRequest);
                 
             var projectsNode = graphQLResponse.Data["node"]["items"]["nodes"];
-
-            foreach (var item in projectsNode)
-            {
-                var columnName = item["fieldValues"]["nodes"].Last["name"].Value<string>();
-
-                switch (columnName)
-                {
-                    case BACKLOG:
-                        _backlogCmpt++;
-                        break;
-                    case A_FAIRE:
-                        _aFaireCmpt++;
-                        break;
-                    case EN_COURS:
-                        _enCoursCmpt++;
-                        break;
-                    case REVUE:
-                        _revueCmpt++;
-                        break;
-                    case TERMINEE:
-                        _termineeCmpt++;
-                        break;
-                    default:
-                        throw new Exception("Column Type was not found");
-                }
-
-                _totalCmpt++;
-            }
-
-            var snapshot = _snapshotService.CreateSnapshot(_backlogCmpt, _aFaireCmpt, _enCoursCmpt, _revueCmpt, _termineeCmpt, DateTime.UtcNow);
             
-            await _dbContext.Snapshots.AddAsync(snapshot);
-            await _dbContext.SaveChangesAsync();
+            return projectsNode;
         }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
         }
-        
-        return Ok();
+
+        return null;
     }
 
-    public class SnapshotToken
+    private async Task<JToken?> QueryByRepoAndOwner(string repo, string owner, GraphQLHttpClient graphQLClient)
     {
-        public string? token { get; set; }
+        var graphQLRequest = new GraphQLHttpRequest
+        {
+            Query = @"
+                query ($repo: String!, $owner: String!) {
+                  repository(name: $repo, owner: $owner){
+                    projectsV2(last:1){
+                      nodes{
+                        ... on ProjectV2 {
+                          items(first: 100) {
+                            totalCount
+                            nodes {
+                              fieldValues(first: 100) {
+                                nodes {
+                                  ... on ProjectV2ItemFieldSingleSelectValue {
+                                    name
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+            ",
+            Variables = new
+            {
+                repo,
+                owner
+            }
+        };
+
+        try
+        {
+            var graphQLResponse = await graphQLClient.SendQueryAsync<JObject>(graphQLRequest);
+                
+            var projectsNode = graphQLResponse.Data["repository"]["projectsV2"]["nodes"].First["items"]["nodes"];
+
+            return projectsNode;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+
+        return null;
     }
 }

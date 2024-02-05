@@ -11,23 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="483314e0-0eb2-4114-8afd-3cf85fc039ff" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../MetricsAPI-LOG680-Tests/MetricsAPI-LOG680-Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../MetricsAPI-LOG680-Tests/MetricsAPI-LOG680-Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MetricsAPI-LOG680-Tests/SnapshotTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../MetricsAPI-LOG680-Tests/UnitTest/SnapshotServiceTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MetricsAPI-LOG680-Tests/UnitTest1.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MetricsAPI-LOG680/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MetricsAPI-LOG680/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.exe" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/MetricsAPI-LOG680.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.MvcApplicationPartsAssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.MvcApplicationPartsAssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/MetricsAPI-LOG680.sourcelink.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/apphost.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/ref/MetricsAPI-LOG680.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/ref/MetricsAPI-LOG680.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/refint/MetricsAPI-LOG680.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/refint/MetricsAPI-LOG680.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/SnapshotController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/SnapshotController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,11 +49,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    ".NET Launch Settings Profile.MetricsAPI-LOG680: http.executor": "Run",
+    ".NET Launch Settings Profile.MetricsAPI-LOG680: http.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feature-unit-test-metriques-visualisation",
+    "git-widget-placeholder": "feature-metriques-visualisation-repo",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -164,6 +149,7 @@
       <workItem from="1706560709202" duration="6803000" />
       <workItem from="1706634892307" duration="4880000" />
       <workItem from="1706885108881" duration="1446000" />
+      <workItem from="1707094751097" duration="3500000" />
     </task>
     <servers />
   </component>
