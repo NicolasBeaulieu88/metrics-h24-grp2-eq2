@@ -101,8 +101,8 @@ public class PRController : ControllerBase
 
     }
 
-    [HttpGet("GetPRMergeTime")]
-    public async Task<IActionResult> GetPRMergeTime([FromQuery]GithubToken githubToken, [FromQuery]GraphQLPullRequest pr){
+    [HttpGet("GetPRMergedTime")]
+    public async Task<IActionResult> GetPRMergedTime([FromQuery]GithubToken githubToken, [FromQuery]GraphQLPullRequest pr){
 
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
         var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
@@ -243,8 +243,8 @@ public class PRController : ControllerBase
         }
     }
 
-    [HttpGet("GetPRDiscussion")] // PRDiscussion the sum of comments, reviews and review requests for a given PR
-    public async Task<IActionResult> GetPRDiscussion([FromQuery]GithubToken githubToken, [FromQuery]GraphQLPullRequest pr){
+    [HttpGet("GetPRDiscussions")] // PRDiscussions: the sum of comments, reviews and review requests for a given PR
+    public async Task<IActionResult> GetPRDiscussions([FromQuery]GithubToken githubToken, [FromQuery]GraphQLPullRequest pr){
 
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
         var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
