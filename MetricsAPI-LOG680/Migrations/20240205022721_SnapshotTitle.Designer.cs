@@ -3,6 +3,7 @@ using System;
 using MetricsAPI_LOG680;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MetricsAPI_LOG680.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    partial class ApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240205022721_SnapshotTitle")]
+    partial class SnapshotTitle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +45,7 @@ namespace MetricsAPI_LOG680.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("column_activity_count", (string)null);
+                    b.ToTable("column_activity_count");
                 });
 
             modelBuilder.Entity("MetricsAPI_LOG680.DTO.FinishedItemsTimeframe", b =>
@@ -68,34 +71,7 @@ namespace MetricsAPI_LOG680.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("finished_items_timeframe", (string)null);
-                });
-
-            modelBuilder.Entity("MetricsAPI_LOG680.DTO.LeadTimePerIssue", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("IsDone")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_done");
-
-                    b.Property<string>("IssueNumber")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("issue_number");
-
-                    b.Property<int>("LeadTime")
-                        .HasColumnType("integer")
-                        .HasColumnName("lead_time");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("lead_time_per_issue");
+                    b.ToTable("finished_items_timeframe");
                 });
 
             modelBuilder.Entity("MetricsAPI_LOG680.DTO.LeadTimeTimeframe", b =>
@@ -126,7 +102,7 @@ namespace MetricsAPI_LOG680.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("lead_time_timeframe", (string)null);
+                    b.ToTable("lead_time_timeframe");
                 });
 
             modelBuilder.Entity("MetricsAPI_LOG680.DTO.Snapshot", b =>
@@ -186,7 +162,7 @@ namespace MetricsAPI_LOG680.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("snapshots", (string)null);
+                    b.ToTable("snapshots");
                 });
 
             modelBuilder.Entity("MetricsAPI_LOG680.DTO.TodoItem", b =>
@@ -209,7 +185,7 @@ namespace MetricsAPI_LOG680.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("todo_items", (string)null);
+                    b.ToTable("todo_items");
                 });
 #pragma warning restore 612, 618
         }
