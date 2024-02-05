@@ -12,6 +12,7 @@ public class PRController : ControllerBase
     private readonly ApiDbContext _dbContext;
     private readonly IGraphQLHelper _graphQlHelper;
 
+
     public PRController(ILogger<PRController> logger, ApiDbContext dbContext, IGraphQLHelper graphQlHelper)
     {
         _logger = logger;
@@ -25,13 +26,15 @@ public class PRController : ControllerBase
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
         var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
         
-        var projectId = graphQLSettings.GetSection("projectId").Value;
 
+        var username = graphQLSettings.GetSection("username").Value;
+        var repository = graphQLSettings.GetSection("repository").Value;
+        
         var graphQLRequest = new GraphQLHttpRequest
         {
             Query = @"
                 query {
-                    repository(owner: ""NicolasBeaulieu88"", name: ""metrics-h24-grp2-eq2"") {
+                    repository(owner: """+ username + @""", name: """ + repository + @""") {
                         pullRequests(first: 100) {
                             nodes {
                                 number
@@ -60,13 +63,14 @@ public class PRController : ControllerBase
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
         var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
         
-        var projectId = graphQLSettings.GetSection("projectId").Value;
+        var username = graphQLSettings.GetSection("username").Value;
+        var repository = graphQLSettings.GetSection("repository").Value;
 
         var graphQLRequest = new GraphQLHttpRequest
         {
             Query = @"
                 query {
-                    repository(owner: ""NicolasBeaulieu88"", name: ""metrics-h24-grp2-eq2"") {
+                    repository(owner: """+ username + @""", name: """ + repository + @""") {
                         pullRequest(number: " + pr.number + @") {
                             number
                             createdAt
@@ -103,13 +107,14 @@ public class PRController : ControllerBase
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
         var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
         
-        var projectId = graphQLSettings.GetSection("projectId").Value;
+        var username = graphQLSettings.GetSection("username").Value;
+        var repository = graphQLSettings.GetSection("repository").Value;
 
         var graphQLRequest = new GraphQLHttpRequest
         {
             Query = @"
                 query {
-                    repository(owner: ""NicolasBeaulieu88"", name: ""metrics-h24-grp2-eq2"") {
+                    repository(owner: """+ username + @""", name: """ + repository + @""") {
                         pullRequest(number: " + pr.number + @") {
                             number
                             createdAt
@@ -146,13 +151,14 @@ public class PRController : ControllerBase
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
         var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
         
-        var projectId = graphQLSettings.GetSection("projectId").Value;
+        var username = graphQLSettings.GetSection("username").Value;
+        var repository = graphQLSettings.GetSection("repository").Value;
 
         var graphQLRequest = new GraphQLHttpRequest
         {
             Query = @"
                 query {
-                    repository(owner: ""NicolasBeaulieu88"", name: ""metrics-h24-grp2-eq2"") {
+                    repository(owner: """+ username + @""", name: """ + repository + @""") {
                         pullRequest(number: " + pr.number + @") {
                             number
                             additions
@@ -186,13 +192,14 @@ public class PRController : ControllerBase
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
         var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
         
-        var projectId = graphQLSettings.GetSection("projectId").Value;
+        var username = graphQLSettings.GetSection("username").Value;
+        var repository = graphQLSettings.GetSection("repository").Value;
 
         var graphQLRequest = new GraphQLHttpRequest
         {
             Query = @"
                 query {
-                    repository(owner: ""NicolasBeaulieu88"", name: ""metrics-h24-grp2-eq2"") {
+                    repository(owner: """+ username + @""", name: """ + repository + @""") {
                         pullRequests(first: 100) {
                             nodes {
                                 number
@@ -222,7 +229,7 @@ public class PRController : ControllerBase
                     openedPR++;
                     if (!string.IsNullOrEmpty(pr["closedAt"]?.ToString()))
                     {
-                    closedPR++;
+                        closedPR++;
                     }
                 }
 
@@ -242,13 +249,14 @@ public class PRController : ControllerBase
         var graphQLSettings = _graphQlHelper.GetGraphQLSettings();
         var graphQLClient = _graphQlHelper.GetClient(githubToken.token);
         
-        var projectId = graphQLSettings.GetSection("projectId").Value;
+        var username = graphQLSettings.GetSection("username").Value;
+        var repository = graphQLSettings.GetSection("repository").Value;
 
         var graphQLRequest = new GraphQLHttpRequest
         {
             Query = @"
                 query {
-                    repository(owner: ""NicolasBeaulieu88"", name: ""metrics-h24-grp2-eq2"") {
+                    repository(owner: """+ username + @""", name: """ + repository + @""") {
                         pullRequest(number: " + pr.number + @") {
                             number
                             comments {
