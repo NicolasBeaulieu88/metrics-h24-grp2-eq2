@@ -11,7 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="483314e0-0eb2-4114-8afd-3cf85fc039ff" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MetricsAPI-LOG680/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MetricsAPI-LOG680/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Repositories/ISnapshotRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Repositories/SnapshotRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/SnapshotController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/SnapshotController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

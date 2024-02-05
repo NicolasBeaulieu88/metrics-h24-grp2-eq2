@@ -22,6 +22,7 @@ public class SnapshotController : ControllerBase
     private const string EN_COURS = "En cours";
     private const string REVUE = "Revue";
     private const string TERMINEE = "Terminée";
+    private const string TOTAL = "Total";
 
     private int _backlogCmpt;
     private int _aFaireCmpt;
@@ -106,7 +107,51 @@ public class SnapshotController : ControllerBase
         
         return Ok();
     }
+    
+    [HttpGet("GetSnapshotOnDate")]
+    public async Task<ActionResult> GetSnapshotOnDate([FromQuery] DateTime startDate,
+                                                    string? owner, string? repository, string? projectId)
+    {
+        var endDate = startDate.AddDays(1);
+        var snapshots = await GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
+        
+        return Ok(snapshots);
+    }
+    
+    [HttpGet("GetProjectTasksMeanBetweenTwoDates")]
+    public async Task<ActionResult> GetProjectTasksMeanBetweenTwoDates(
+                            [FromQuery] DateTime startDate, [FromQuery] DateTime endDate,
+                            string? owner, string? repository, string? projectId)
+    {
+        var snapshots = await GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
 
+        int moy = 0;
+        foreach (var snapshot in snapshots)
+        {
+            moy += snapshot.Total_items;
+        }
+        
+        return Ok($"Moyenne de issues entre {startDate} et {endDate} : {GetMoyenneIssues(moy, snapshots.Count())} issues");
+    }
+    
+    [HttpGet("GetProjectBottleneck")]
+    public async Task<ActionResult> GetProjectBottleneck(string? owner, string? repository, string? projectId)
+    {
+        var snapshots = await GetAllSnapshots(owner, repository, projectId);
+        var sortedSnaps = SortSnapshotsByGreaterNumberIssues(snapshots);
+        return Ok(GetBottleneck(sortedSnaps));
+    }
+    
+    [HttpGet("GetProjectBottleneckBetweenDates")]
+    public async Task<ActionResult> GetProjectBottleneckBetweenDates(
+                                    [FromQuery] DateTime startDate, [FromQuery] DateTime endDate,
+                                    string? owner, string? repository, string? projectId)
+    {
+        var snapshots = await GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
+        var sortedSnaps = SortSnapshotsByGreaterNumberIssues(snapshots);
+        return Ok(GetBottleneck(sortedSnaps));
+    }
+    
     private async Task<JToken?> QueryByProjectId(string projectId, GraphQLHttpClient graphQLClient)
     {
         var graphQLRequest = new GraphQLHttpRequest
@@ -205,31 +250,37 @@ public class SnapshotController : ControllerBase
 
         return null;
     }
-    
-    [HttpGet("GetSnapshotOnDate")]
-    public async Task<ActionResult> GetSnapshotOnDate([FromQuery] DateTime startDate,
-                                                    string? owner, string? repository, string? projectId)
-    {
-        var endDate = startDate.AddDays(1);
-        var snapshots = await GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
-        
-        return Ok(snapshots);
-    }
-    
-    [HttpGet("GetProjectTasksMeanBetweenTwoDates")]
-    public async Task<ActionResult> GetProjectTasksMeanBetweenTwoDates(
-                            [FromQuery] DateTime startDate, [FromQuery] DateTime endDate,
-                            string? owner, string? repository, string? projectId)
-    {
-        var snapshots = await GetSnapshotsByDates(startDate, endDate, owner, repository, projectId);
 
-        int moy = 0;
+    private Dictionary<string, double> SortSnapshotsByGreaterNumberIssues(IEnumerable<Snapshot> snapshots)
+    {
+        Dictionary<string, double> snapshotsDict = new Dictionary<string, double>();
+        snapshotsDict[BACKLOG] = 0;
+        snapshotsDict[A_FAIRE] = 0;
+        snapshotsDict[EN_COURS] = 0;
+        snapshotsDict[REVUE] = 0;
+        snapshotsDict[TERMINEE] = 0;
+        snapshotsDict[TOTAL] = 0;
+
         foreach (var snapshot in snapshots)
         {
-            moy += snapshot.Total_items;
+            snapshotsDict[BACKLOG] += snapshot.Backlog_items;
+            snapshotsDict[A_FAIRE] += snapshot.A_faire_items;
+            snapshotsDict[EN_COURS] += snapshot.En_cours_items;
+            snapshotsDict[REVUE] += snapshot.Revue_items;
+            snapshotsDict[TERMINEE] += snapshot.Terminee_items;
+            snapshotsDict[TOTAL] += snapshot.Total_items;
         }
         
-        return Ok($"Moyenne de issues entre {startDate} et {endDate} : {moy / snapshots.Count()} issues");
+        return snapshotsDict.OrderByDescending(kvp => kvp.Value)
+                    .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+    }
+    
+    private string GetBottleneck(Dictionary<string, double> sortedSnaps)
+    {
+        sortedSnaps.Remove(TOTAL, out double total);
+        var bottleneck = sortedSnaps.First();
+        var btlnckPrctng = GetMoyenneIssues(bottleneck.Value, total) * 100;
+        return $"Le goulot d'étranglement dans le Kanban est {bottleneck.Key} : {btlnckPrctng.ToString("F2")}%";
     }
 
     private async Task<IEnumerable<Snapshot>> GetSnapshotsByDates(DateTime startDate, DateTime endDate,
@@ -255,5 +306,32 @@ public class SnapshotController : ControllerBase
                                 .Where(s => s.Timestamps >= startDate.ToUniversalTime()
                                             && s.Timestamps <= endDate.ToUniversalTime())
                                 .ToListAsync();
+    }
+
+    private async Task<IEnumerable<Snapshot>> GetAllSnapshots(string? owner, string? repository, string? projectId)
+    {
+        if (projectId != null)
+        {
+            return await _dbContext.Snapshots
+                        .Where(s => s.Project_id == projectId)
+                        .ToListAsync();
+        }
+        if (repository != null && owner != null)
+        {
+            return await _dbContext.Snapshots
+                        .Where(s => s.Repository_name == repository && s.Owner == owner)
+                        .ToListAsync();
+        }
+        return await _dbContext.Snapshots.ToListAsync();
+    }
+    
+    private int GetMoyenneIssues(int moy, int nbItems)
+    {
+        return moy / nbItems;
+    }
+    
+    private double GetMoyenneIssues(double moy, double nbItems)
+    {
+        return moy / nbItems;
     }
 }
