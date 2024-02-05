@@ -321,8 +321,6 @@ namespace MetricsAPI_LOG680.Controllers
                 {
                     var graphQLResponse = await graphQLClient.SendQueryAsync<dynamic>(graphQLRequest);
 
-                    var simplifiedJson = graphQLResponse.Data.ToString();
-
                     var issue = graphQLResponse.Data["repository"]["issue"];
                     
                     DateTime createdAt = DateTime.Parse(issue["createdAt"].ToString());                
@@ -344,11 +342,8 @@ namespace MetricsAPI_LOG680.Controllers
                     };
                     await _dbContext.LeadTimePerIssues.AddAsync(leadTime);
                     await _dbContext.SaveChangesAsync();
-
-                    Console.WriteLine(createdAt);
-                    Console.WriteLine(closed);
                     
-                    return Ok(simplifiedJson);
+                    return Ok(issueNumber + ": " + lead_time);
                 }
                 catch (Exception e)
                 {
