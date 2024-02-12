@@ -1,0 +1,11 @@
+version: '3'
+services:
+  metrics-api:
+    image: metricsapi
+    container_name: MetricsAPI
+    build:
+      context: ./MetricsAPI-LOG680
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+      - 8081:8081
