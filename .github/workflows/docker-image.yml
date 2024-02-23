@@ -28,7 +28,6 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with: 
-        context: .
-        dockerfile: ./MetricsAPI-LOG680/Dockerfile
+        context: MetricsAPI-LOG680
         push: true
         tags: santiagochiappe/log680_metrics:${{ env.TIMESTAMP }}
