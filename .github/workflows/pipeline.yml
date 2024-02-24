@@ -24,11 +24,8 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ./MetricsAPI-LOG680/MetricsAPI-LOG680.sln
       
- #   - name: Build
- #     run: dotnet build ./MetricsAPI-LOG680/MetricsAPI-LOG680.sln --no-restore
-
     - name: Format code
-      run: dotnet format ./MetricsAPI-LOG680/MetricsAPI-LOG680.sln --check
+      run: dotnet tool install -g dotnet-format && dotnet format ./MetricsAPI-LOG680/MetricsAPI-LOG680.sln --check
 
     - name: Analyze code
       run: dotnet build ./MetricsAPI-LOG680/MetricsAPI-LOG680.sln --no-restore /p:RunAnalyzersDuringBuild=true
