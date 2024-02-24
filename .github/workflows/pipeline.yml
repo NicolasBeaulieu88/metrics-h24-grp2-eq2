@@ -24,14 +24,14 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ./MetricsAPI-LOG680/MetricsAPI-LOG680.sln
       
-    - name: Build
-      run: dotnet build ./MetricsAPI-LOG680/MetricsAPI-LOG680.sln --no-restore
+ #   - name: Build
+ #     run: dotnet build ./MetricsAPI-LOG680/MetricsAPI-LOG680.sln --no-restore
 
     - name: Format code
       run: dotnet format ./MetricsAPI-LOG680/MetricsAPI-LOG680.sln --check
 
     - name: Analyze code
-      run: dotnet analyze ./MetricsAPI-LOG680/MetricsAPI-LOG680.sln
+      run: dotnet build ./MetricsAPI-LOG680/MetricsAPI-LOG680.sln --no-restore /p:RunAnalyzersDuringBuild=true
       
     - name: Test
       run: dotnet test ./MetricsAPI-LOG680-Tests/MetricsAPI-LOG680-Tests.csproj --no-build --verbosity normal
