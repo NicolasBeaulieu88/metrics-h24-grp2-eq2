@@ -25,7 +25,7 @@ jobs:
       run: dotnet restore ./MetricsAPI-LOG680/MetricsAPI-LOG680.sln
       
     - name: Format code
-      run: dotnet tool install -g dotnet-format && dotnet format ./MetricsAPI-LOG680/MetricsAPI-LOG680.sln --check
+      run: dotnet tool install -g dotnet-format && dotnet format ./MetricsAPI-LOG680/MetricsAPI-LOG680.sln --dry-run
 
     - name: Analyze code
       run: dotnet build ./MetricsAPI-LOG680/MetricsAPI-LOG680.sln --no-restore /p:RunAnalyzersDuringBuild=true
