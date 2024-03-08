@@ -1,0 +1,78 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore ./MetricsAPI-LOG680/MetricsAPI-LOG680.sln
+      
+    - name: Format code
+      run: dotnet tool install -g dotnet-format && dotnet format ./MetricsAPI-LOG680/MetricsAPI-LOG680.sln
+
+    - name: Analyze code
+      run: dotnet build ./MetricsAPI-LOG680/MetricsAPI-LOG680.sln --no-restore /p:RunAnalyzersDuringBuild=true
+      
+    - name: Test
+      run: dotnet test ./MetricsAPI-LOG680-Tests/MetricsAPI-LOG680-Tests.csproj --no-build --verbosity normal
+
+  build:
+    if: > 
+      (github.event_name == 'push' && github.ref == 'refs/heads/main') || 
+      (github.event_name == 'pull_request' && github.event.action == 'closed'
+      && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main')
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Build Docker image
+      uses: docker/build-push-action@v2
+      with: 
+        context: MetricsAPI-LOG680
+        push: false
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/log680_metrics:latest, ${{ secrets.DOCKER_HUB_USERNAME }}/log680_metrics:${{ github.run_id }}
+
+  deploy:
+    if: > 
+      (github.event_name == 'push' && github.ref == 'refs/heads/main') || 
+      (github.event_name == 'pull_request' && github.event.action == 'closed'
+      && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main')
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      
+    - name: Push Docker image
+      uses: docker/build-push-action@v2
+      with: 
+        context: MetricsAPI-LOG680
+        push: true
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/log680_metrics:latest, ${{ secrets.DOCKER_HUB_USERNAME }}/log680_metrics:${{ github.run_id }}
