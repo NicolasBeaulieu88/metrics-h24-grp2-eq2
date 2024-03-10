@@ -5,7 +5,7 @@ start_time=$(date +"%s")
 
 # Run Docker build
 cd ../MetricsAPI-LOG680 || exit
-docker build -t your_image_name .
+docker build -t metricsapi .
 cd ../buildtools || exit
 
 # End time of the build
