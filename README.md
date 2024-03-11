@@ -1,4 +1,4 @@
-# metrics-h24-grp2-eq2.
+# metrics-h24-grp2-eq2
 Pour les laboratoire du cours LOG680.
 
 Pour utiiliser l'application il faut compiler et lancer le projet avec Visual Studio ou Rider.
