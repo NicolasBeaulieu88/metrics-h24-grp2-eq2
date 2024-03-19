@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics
+  labels:
+    app: metrics-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: metrics-api
+  template:
+    metadata:
+      labels:
+        app: metrics-api
+    spec:
+      containers:
+      - name: metrics
+        image: santiagochiappe/log680_metrics
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+          limits:
+            cpu: "250m"
+            memory: "250Mi"
