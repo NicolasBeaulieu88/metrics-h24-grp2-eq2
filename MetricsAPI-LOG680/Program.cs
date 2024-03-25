@@ -48,11 +48,6 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint($"{Configuration["SwaggerBasePath"].TrimEnd('/')}/swagger/v1/swagger.json", "My API V1");
 });
 
-// Log the SwaggerBasePath
-var logger = app.Services.GetRequiredService<ILogger<Program>>();
-logger.LogInformation($"SwaggerBasePath: {Configuration["SwaggerBasePath"]}");
-
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

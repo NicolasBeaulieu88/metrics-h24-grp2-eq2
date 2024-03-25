@@ -34,10 +34,10 @@ jobs:
       run: dotnet test ./MetricsAPI-LOG680-Tests/MetricsAPI-LOG680-Tests.csproj --no-build --verbosity normal
 
   build:
-#    if: > 
-#      (github.event_name == 'push' && github.ref == 'refs/heads/main') || 
-#      (github.event_name == 'pull_request' && github.event.action == 'closed'
-#      && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main')
+    if: > 
+      (github.event_name == 'push' && github.ref == 'refs/heads/main') || 
+      (github.event_name == 'pull_request' && github.event.action == 'closed'
+      && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main')
     needs: test
     runs-on: ubuntu-latest
 
@@ -53,10 +53,6 @@ jobs:
         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/log680_metrics:latest, ${{ secrets.DOCKER_HUB_USERNAME }}/log680_metrics:${{ github.run_id }}
 
   deploy:
-#    if: > 
-#      (github.event_name == 'push' && github.ref == 'refs/heads/main') || 
-#      (github.event_name == 'pull_request' && github.event.action == 'closed'
-#      && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main')
     needs: build
     runs-on: ubuntu-latest
 
@@ -78,10 +74,6 @@ jobs:
         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/log680_metrics:latest, ${{ secrets.DOCKER_HUB_USERNAME }}/log680_metrics:${{ github.run_id }}
   
   publish:
-#    if: > 
-#      (github.event_name == 'push' && github.ref == 'refs/heads/main') || 
-#      (github.event_name == 'pull_request' && github.event.action == 'closed'
-#      && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main')
     needs: deploy
     runs-on: ubuntu-latest
     
