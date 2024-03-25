@@ -51,6 +51,8 @@ jobs:
         context: MetricsAPI-LOG680
         push: false
         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/log680_metrics:latest, ${{ secrets.DOCKER_HUB_USERNAME }}/log680_metrics:${{ github.run_id }}
+      env:
+        ASPNETCORE_ENVIRONMENT: Production
 
   deploy:
 #    if: > 
@@ -98,6 +100,7 @@ jobs:
 
     - name: Deploy to Kubernetes
       run: |
+        sed -i 's/TAG/${{ github.run_id }}/g' metrics-deployment.yaml
         kubectl apply -f kubernetes/metrics-deployment.yaml --kubeconfig ./kubeconfig.yaml
         kubectl rollout status deployment/metrics --kubeconfig ./kubeconfig.yaml
       env:
