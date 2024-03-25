@@ -11,7 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="483314e0-0eb2-4114-8afd-3cf85fc039ff" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../kubernetes/metrics-ingress.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../kubernetes/metrics-ingress.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,6 +153,7 @@
       <workItem from="1707153608946" duration="3317000" />
       <workItem from="1707770855978" duration="523000" />
       <workItem from="1711302531530" duration="1212000" />
+      <workItem from="1711324538975" duration="2403000" />
     </task>
     <servers />
   </component>
