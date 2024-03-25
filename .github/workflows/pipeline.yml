@@ -89,16 +89,16 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-      - name: Install and configure kubectl
-        run: |
-          curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
-          chmod +x ./kubectl
-          sudo mv ./kubectl /usr/local/bin/kubectl
-          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ./kubeconfig.yaml
+    - name: Install and configure kubectl
+      run: |
+        curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+        chmod +x ./kubectl
+        sudo mv ./kubectl /usr/local/bin/kubectl
+        echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ./kubeconfig.yaml
 
-      - name: Deploy to Kubernetes
-        run: |
-          kubectl apply -f kubernetes/metrics-deployment.yaml --kubeconfig ./kubeconfig.yaml
-          kubectl rollout status deployment/metrics --kubeconfig ./kubeconfig.yaml
-        env:
-          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl apply -f kubernetes/metrics-deployment.yaml --kubeconfig ./kubeconfig.yaml
+        kubectl rollout status deployment/metrics --kubeconfig ./kubeconfig.yaml
+      env:
+        KUBECONFIG: ${{ secrets.KUBECONFIG }}
