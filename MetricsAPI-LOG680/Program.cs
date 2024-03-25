@@ -33,8 +33,15 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwagger(c =>
+{
+    c.RouteTemplate = $"swagger/{{documentName}}/swagger.json";
+});
+
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint($"{Configuration["SwaggerBasePath"].TrimEnd('/')}/swagger/v1/swagger.json", "My API V1");
+});
 
 app.UseHttpsRedirection();
 
