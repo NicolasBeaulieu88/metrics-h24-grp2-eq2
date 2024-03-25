@@ -100,7 +100,7 @@ jobs:
 
     - name: Deploy to Kubernetes
       run: |
-        sed -i 's/TAG/${{ github.run_id }}/g' metrics-deployment.yaml
+        sed -i 's/TAG/${{ github.run_id }}/g' kubernetes/metrics-deployment.yaml
         kubectl apply -f kubernetes/metrics-deployment.yaml --kubeconfig ./kubeconfig.yaml
         kubectl rollout status deployment/metrics --kubeconfig ./kubeconfig.yaml
       env:
