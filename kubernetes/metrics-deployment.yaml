@@ -17,6 +17,7 @@ spec:
       containers:
       - name: metrics
         image: santiagochiappe/log680_metrics
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         resources:
