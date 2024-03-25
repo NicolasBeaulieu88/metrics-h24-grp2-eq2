@@ -3,6 +3,7 @@ using MetricsAPI_LOG680.Helpers;
 using MetricsAPI_LOG680.Repositories;
 using MetricsAPI_LOG680.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,10 @@ if (app.Environment.IsDevelopment())
 app.UseSwagger(c =>
 {
     c.RouteTemplate = $"swagger/{{documentName}}/swagger.json";
+    c.PreSerializeFilters.Add((swagger, httpReq) =>
+    {
+        swagger.Servers = new List<OpenApiServer> { new() { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}{Configuration["SwaggerBasePath"]}" } };
+    });
 });
 
 app.UseSwaggerUI(c =>
