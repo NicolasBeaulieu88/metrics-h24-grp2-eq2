@@ -25,6 +25,7 @@ builder.Services.AddScoped<ISnapshotRepository, SnapshotRepository>();
 builder.Services.AddScoped<IPRMetricsService, PRMetricsService>();
 builder.Services.AddScoped<ISnapshotJSONService, SnapshotJSONService>();
 builder.Services.AddScoped<ISnapshotJSONRepository, SnapshotJSONRepository>();
+builder.Services.AddHostedService<CronjobService>();
 
 var app = builder.Build();
 
